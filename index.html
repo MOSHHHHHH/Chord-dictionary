@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0045)https://moshhhhhh.github.io/Chord-dictionary/ -->
 <html lang="he" dir="rtl">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -203,6 +202,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+            line-height: 1.6;
         }
         #chord-notes {
             font-size: 1.5rem;
@@ -216,7 +216,7 @@
             direction: ltr;
         }
          #chord-explanation {
-            font-size: 1.125rem;
+            font-size: 1.1rem;
             color: var(--gray-700);
         }
         
@@ -316,15 +316,10 @@
         .white-key[data-note="B"] { left: calc(6 * var(--white-key-width)); }
 
         /* Specific positioning for black keys - Adjusted for realism */
-        /* C# is positioned between C and D */
         .black-key[data-note="C#"] { left: calc(var(--white-key-width) - var(--black-key-width) / 2); }
-        /* D# is positioned between D and E */
         .black-key[data-note="D#"] { left: calc(2 * var(--white-key-width) - var(--black-key-width) / 2); }
-        /* F# is positioned between F and G */
         .black-key[data-note="F#"] { left: calc(4 * var(--white-key-width) - var(--black-key-width) / 2); }
-        /* G# is positioned between G and A */
         .black-key[data-note="G#"] { left: calc(5 * var(--white-key-width) - var(--black-key-width) / 2); }
-        /* A# is positioned between A and B */
         .black-key[data-note="A#"] { left: calc(6 * var(--white-key-width) - var(--black-key-width) / 2); }
 
 
@@ -344,6 +339,9 @@
                 --black-key-width: 22px;
                 --black-key-height: 75px;
             }
+             main {
+                grid-template-columns: 1fr;
+            }
         }
         @media (max-width: 480px) {
             :root {
@@ -355,6 +353,10 @@
                 font-size: 0.55rem;
                 padding-bottom: 2px;
             }
+            h1 { font-size: 1.75rem; }
+            .card h2 { font-size: 1.25rem; }
+            #chord-display { font-size: 1.75rem; }
+            #chord-notes { font-size: 1.25rem; }
         }
 
     </style>
@@ -437,13 +439,13 @@
                 </div>
 
                 <div>
-                    <h3>🔄 שמות נוספים (אנהרמוניה)</h3>
-                    <div id="chord-aliases" class="output-box">אין</div>
+                    <h3>🔄 שמות וסימונים נוספים</h3>
+                    <div id="chord-aliases" class="output-box">CM</div>
                 </div>
 
                 <div>
                     <h3>📖 הסבר על מבנה האקורד</h3>
-                    <div id="chord-explanation" class="output-box">מורכב מתו בסיס, טרצה גדולה (4 חצאי טונים) וקווינטה זכה (7 חצאי טונים).</div>
+                    <div id="chord-explanation" class="output-box">אקורד מז'ורי, בעל צליל 'שמח' ויציב. בנוי מתו בסיס, טרצה גדולה (מרווח של 4 חצאי טונים מהבסיס) וקווינטה זכה (7 חצאי טונים מהבסיס). זהו האקורד הבסיסי והנפוץ ביותר במוזיקה המערבית.</div>
                 </div>
 
                 <!-- Piano Visualization Section -->
@@ -472,7 +474,7 @@
     </div>
 
     <!-- חלון עזרה (מודאל) -->
-    <div id="modal-backdrop" class="">
+    <div id="modal-backdrop">
         <div id="help-modal" class="card">
             <h2>אודות האפליקציה</h2>
             <p>
@@ -489,12 +491,11 @@
              <h3>מה רואים בתוצאה?</h3>
             <ul>
                 <li><strong>מרכיבי האקורד:</strong> התווים המדויקים שמרכיבים את האקורד.</li>
-                <li><strong>שמות נוספים:</strong> שמות אנהרמוניים לאקורד, אם קיימים.</li>
-                <li><strong>הסבר על המבנה:</b> הנוסחה והמרווחים שיוצרים את סוג האקורד.</li>
+                <li><strong>שמות נוספים:</strong> שמות וסימונים חלופיים לאקורד, כולל שמות אנהרמוניים.</li>
+                <li><strong>הסבר על המבנה:</strong> פירוט על הנוסחה, המרווחים והאופי של האקורד.</li>
                 <li><strong>הצגה חזותית על פסנתר:</strong> תצוגה גרפית של האקורד על קלידי הפסנתר.</li>
             </ul>
             <div style="text-align: center; font-size: 0.875rem; color: var(--gray-500); padding-top: 1rem; border-top: 1px solid var(--gray-200);">
-                <p>נוצרה עבור י.ד.</p>
                 <p>פותח באמצעות Gemini 🛡️</p>
             </div>
             <button id="close-modal-btn" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">הבנתי, תודה!</button>
@@ -509,25 +510,20 @@
                 flat:  ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B']
             };
 
-            // Mapping for piano key display (always uses sharps for black keys internally for consistent visual mapping)
-            const PIANO_NOTES_ORDER = [
-                'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'
-            ];
-
             const CHORD_FORMULAS = {
-                maj:   { name: 'מז\'ור', intervals: [0, 4, 7], explanation: 'מורכב מתו בסיס, טרצה גדולה (4 חצאי טונים) וקווינטה זכה (7 חצאי טונים).' },
-                min:   { name: 'מינור', intervals: [0, 3, 7], explanation: 'מורכב מתו בסיס, טרצה קטנה (3 חצאי טונים) וקווינטה זכה (7 חצאי טונים).' },
-                dim:   { name: 'מוקטן (diminished)', intervals: [0, 3, 6], explanation: 'מורכב מתו בסיס, טרצה קטנה (3 חצאי טונים) וקווינטה מוקטנת (6 חצאי טונים).' },
-                aug:   { name: 'מוגדל (augmented)', intervals: [0, 4, 8], explanation: 'מורכב מתו בסיס, טרצה גדולה (4 חצאי טונים) וקווינטה מוגדלת (8 חצאי טונים).' },
-                '7':     { name: 'דומיננטי (7)', intervals: [0, 4, 7, 10], explanation: 'אקורד מז\'ור עם תוספת של ספטימה קטנה (10 חצאי טונים).' },
-                maj7:  { name: 'מז\'ור 7', intervals: [0, 4, 7, 11], explanation: 'אקורד מז\'ור עם תוספת של ספטימה גדולה (11 חצאי טונים).' },
-                min7:  { name: 'מינור 7', intervals: [0, 3, 7, 10], explanation: 'אקורד מינור עם תוספת של ספטימה קטנה (10 חצאי טונים).' },
-                sus2:  { name: 'sus2', intervals: [0, 2, 7], explanation: 'אקורד בו הטרצה מוחלפת בסקונדה גדולה (2 חצאי טונים).' },
-                sus4:  { name: 'sus4', intervals: [0, 5, 7], explanation: 'אקורד בו הטרצה מוחלפת בקוורטה זכה (5 חצאי טונים).' },
-                '6':     { name: 'מז\'ור 6', intervals: [0, 4, 7, 9], explanation: 'אקורד מז\'ור עם תוספת של סקסטה גדולה (9 חצאי טונים).' },
-                m6:    { name: 'מינור 6', intervals: [0, 3, 7, 9], explanation: 'אקורד מינור עם תוספת של סקסטה גדולה (9 חצאי טונים).' },
-                dim7:  { name: 'מוקטן 7', intervals: [0, 3, 6, 9], explanation: 'אקורד מוקטן עם תוספת של ספטימה מוקטנת (9 חצאי טונים).' },
-                m7b5:  { name: 'חצי מוקטן (m7b5)', intervals: [0, 3, 6, 10], explanation: 'אקורד מוקטן עם תוספת של ספטימה קטנה (10 חצאי טונים).' }
+                maj:   { name: 'מז\'ור', intervals: [0, 4, 7], aliases: ['', 'M'], explanation: "אקורד מז'ורי, בעל צליל 'שמח' ויציב. בנוי מתו בסיס, טרצה גדולה (מרווח של 4 חצאי טונים מהבסיס) וקווינטה זכה (7 חצאי טונים מהבסיס). זהו האקורד הבסיסי והנפוץ ביותר במוזיקה המערבית." },
+                min:   { name: 'מינור', intervals: [0, 3, 7], aliases: ['m', 'min', '-'], explanation: "אקורד מינורי, בעל צליל 'עצוב' או 'נוגה'. בנוי מתו בסיס, טרצה קטנה (3 חצאי טונים) וקווינטה זכה (7 חצאי טונים). ההבדל היחיד בינו לבין אקורד מז'ור הוא הנמכת הטרצה בחצי טון." },
+                dim:   { name: 'מוקטן (diminished)', intervals: [0, 3, 6], aliases: ['dim', '°'], explanation: "אקורד מוקטן (דימינישד), בעל צליל מתוח וחסר יציבות. בנוי משתי טרצות קטנות זו על גבי זו: תו בסיס, טרצה קטנה (3 חצאי טונים) וקווינטה מוקטנת (6 חצאי טונים)." },
+                aug:   { name: 'מוגדל (augmented)', intervals: [0, 4, 8], aliases: ['aug', '+', '+5'], explanation: "אקורד מוגדל (אוגמנטד), בעל צליל 'חולמני' או מתוח. בנוי משתי טרצות גדולות זו על גבי זו: תו בסיס, טרצה גדולה (4 חצאי טונים) וקווינטה מוגדלת (8 חצאי טונים)." },
+                '7':     { name: 'דומיננטי (7)', intervals: [0, 4, 7, 10], aliases: ['7', 'dom7'], explanation: "אקורד דומיננטי 7, אקורד מז'ורי עם תוספת של ספטימה קטנה (10 חצאי טונים). בעל צליל עשיר ומלא מתח ש'רוצה להיפתר' לאקורד הטוניקה. נפוץ מאוד בבלוז וג'אז." },
+                maj7:  { name: 'מז\'ור 7', intervals: [0, 4, 7, 11], aliases: ['maj7', 'M7', 'Δ7'], explanation: "אקורד מז'ור 7, אקורד מז'ורי עם תוספת של ספטימה גדולה (11 חצאי טונים). בעל צליל 'רך', 'עשיר' ו'חולמני'. נפוץ בג'אז, פופ ובלדות." },
+                min7:  { name: 'מינור 7', intervals: [0, 3, 7, 10], aliases: ['m7', 'min7', '-7'], explanation: "אקורד מינור 7, אקורד מינורי עם תוספת של ספטימה קטנה (10 חצאי טונים). בעל צליל 'חלק', 'מתוחכם' ופחות 'עצוב' מהאקורד המינורי הרגיל." },
+                sus2:  { name: 'sus2', intervals: [0, 2, 7], aliases: ['sus2'], explanation: "אקורד מושהה (sus) בו הדרגה השלישית (הטרצה) מוחלפת בדרגה השנייה (סקונדה גדולה, 2 חצאי טונים). יוצר צליל פתוח, אוורירי וחסר 'אופי' מז'ורי/מינורי מובהק." },
+                sus4:  { name: 'sus4', intervals: [0, 5, 7], aliases: ['sus4', 'sus'], explanation: "אקורד מושהה (sus) בו הדרגה השלישית (הטרצה) מוחלפת בדרגה הרביעית (קוורטה זכה, 5 חצאי טונים). יוצר מתח ששואף להיפתר חזרה לאקורד המקורי (בדרך כלל מז'ור)." },
+                '6':     { name: 'מז\'ור 6', intervals: [0, 4, 7, 9], aliases: ['6', 'M6'], explanation: "אקורד מז'ור 6, אקורד מז'ורי עם תוספת של סקסטה גדולה (9 חצאי טונים). בעל צליל 'מתוק' ונוסטלגי, נפוץ במוזיקת ג'אז וסווינג ישנה." },
+                m6:    { name: 'מינור 6', intervals: [0, 3, 7, 9], aliases: ['m6', 'min6', '-6'], explanation: "אקורד מינור 6, אקורד מינורי עם תוספת של סקסטה גדולה (9 חצאי טונים). בעל צליל מורכב ומתוחכם, לעיתים קרובות משמש באלתורי ג'אז." },
+                dim7:  { name: 'מוקטן 7', intervals: [0, 3, 6, 9], aliases: ['dim7', '°7'], explanation: "אקורד מוקטן 7, אקורד מוקטן עם תוספת של ספטימה מוקטנת (9 חצאי טונים). זהו אקורד סימטרי (כל המרווחים הם טרצות קטנות) ובעל מתח גבוה מאוד." },
+                m7b5:  { name: 'חצי מוקטן (m7b5)', intervals: [0, 3, 6, 10], aliases: ['m7b5', 'ø', 'ø7'], explanation: "אקורד חצי מוקטן (מינור 7 עם קווינטה מונמכת), אקורד מוקטן עם תוספת של ספטימה קטנה (10 חצאי טונים). בעל צליל מתוח אך פחות 'צורם' מה-dim7. נפוץ מאוד במהלך ה-ii-V-I בסולם מינורי." }
             };
 
             const ENHARMONICS = {
@@ -571,50 +567,73 @@
                     return;
                 }
 
+                // Determine whether to use sharps or flats for calculation
                 let useSharp;
                 if (accidental === 'b') {
                     useSharp = false;
                 } else if (accidental === '#') {
                     useSharp = true;
-                } else { // Natural root note
-                    useSharp = root !== 'F';
+                } else { 
+                    // For natural notes, prefer sharps unless it's F or C (common flat keys)
+                    // This is a heuristic for cleaner display.
+                    useSharp = !['F', 'C'].includes(root);
                 }
 
                 const rootIndex = useSharp ? rootIndexSharp : rootIndexFlat;
                 const scale = useSharp ? NOTES.sharp : NOTES.flat;
                 
-                if (rootIndex === -1) { // Safety check for cases like 'Fb' or 'E#'
+                if (rootIndex === -1) { 
                      displayError('תו בסיס לא קיים (אנהרמוני).');
                      return;
                 }
                 
                 const notes = formula.intervals.map(interval => scale[(rootIndex + interval) % 12]);
                 
-                const chordName = `${fullRoot}${type === 'maj' ? '' : (type === 'min' ? 'm' : type)}`;
+                // Determine primary display name
+                let primaryAlias = type;
+                if(type === 'maj') primaryAlias = '';
+                if(type === 'min') primaryAlias = 'm';
+                const chordName = `${fullRoot}${primaryAlias}`;
                 
                 chordDisplay.innerHTML = `<span dir="ltr">${chordName}</span>`;
-
                 chordNotesEl.textContent = notes.join(' - ');
                 chordExplanationEl.textContent = formula.explanation;
 
-                const aliasRoot = ENHARMONICS[fullRoot];
-                if (aliasRoot) {
-                    const aliasType = type === 'maj' ? '' : (type === 'min' ? 'm' : type);
-                    chordAliasesEl.textContent = `${aliasRoot}${aliasType}`;
+                // --- Alias Generation ---
+                let allAliases = [];
+                const enharmonicRoot = ENHARMONICS[fullRoot];
+
+                // 1. Generate aliases for the original root
+                if (formula.aliases) {
+                    allAliases = allAliases.concat(formula.aliases.map(alias => `${fullRoot}${alias}`));
+                }
+
+                // 2. Generate aliases for the enharmonic root
+                if (enharmonicRoot) {
+                    if (formula.aliases) {
+                        allAliases = allAliases.concat(formula.aliases.map(alias => `${enharmonicRoot}${alias}`));
+                    }
+                }
+
+                // 3. Filter out the primary display name and remove duplicates
+                const finalAliases = [...new Set(allAliases)].filter(a => a !== chordName);
+
+                if (finalAliases.length > 0) {
+                    chordAliasesEl.textContent = finalAliases.join(' , ');
                 } else {
                     chordAliasesEl.textContent = 'אין';
                 }
 
                 updateActiveButtons();
-                highlightPianoKeys(notes); // Call new function to highlight piano keys
+                highlightPianoKeys(notes);
             }
             
             function displayError(message) {
                 chordDisplay.textContent = 'שגיאה';
                 chordNotesEl.textContent = message;
                 chordAliasesEl.textContent = '...';
-                chordExplanationEl.textContent = '...';
-                clearPianoHighlight(); // Clear piano on error
+                chordExplanationEl.textContent = 'נא לבחור אקורד תקין.';
+                clearPianoHighlight();
             }
 
             function updateActiveButtons() {
@@ -631,46 +650,41 @@
             function parseChordName(inputString) {
                 if (!inputString) return null;
                 
-                const cleanedString = inputString.trim();
-                const match = cleanedString.match(/^([A-G])([#b]?)(.*)$/i);
+                // Handle special characters for aliases
+                const sanitizedString = inputString.trim()
+                    .replace('Δ', 'maj7')
+                    .replace('°', 'dim')
+                    .replace('ø', 'm7b5')
+                    .replace('-', 'm');
+
+                const match = sanitizedString.match(/^([A-G])([#b]?)(.*)$/i);
                 
                 if (!match) return null;
 
                 let [, root, accidental, type] = match;
                 root = root.toUpperCase();
+                
+                // Normalize type from aliases
                 type = type.toLowerCase();
-                
-                if (type === '') { type = 'maj'; }
-                if (type === 'm') { type = 'min'; }
-                
+                if (type === '' || type === 'm' || type === 'maj') {
+                    type = (type === 'm') ? 'min' : 'maj';
+                }
+                if (type === 'sus') type = 'sus4';
+                if (type === '+') type = 'aug';
+
+
                 if (!CHORD_FORMULAS[type]) {
-                    const knownTypes = Object.keys(CHORD_FORMULAS);
-                    const foundType = knownTypes.find(t => type === t.toLowerCase());
-                     if (foundType) {
-                        type = foundType;
-                    } else {
-                        return null;
-                    }
+                    return null; // Return null if type is still not found
                 }
                 
                 return { root, accidental, type };
             }
 
             function highlightPianoKeys(notesToHighlight) {
-                // Remove all existing highlights
                 clearPianoHighlight();
-
-                // Map the notes to their piano key representation (prefer sharps for black keys)
                 const pianoNotes = notesToHighlight.map(note => {
-                    if (note === 'Db') return 'C#';
-                    if (note === 'Eb') return 'D#';
-                    if (note === 'Gb') return 'F#';
-                    if (note === 'Ab') return 'G#';
-                    if (note === 'Bb') return 'A#';
-                    return note;
+                    return ENHARMONICS[note] ? NOTES.sharp[NOTES.flat.indexOf(note)] : note;
                 });
-
-                // Highlight the corresponding keys
                 pianoKeys.forEach(key => {
                     if (pianoNotes.includes(key.dataset.note)) {
                         key.classList.add('highlight');
