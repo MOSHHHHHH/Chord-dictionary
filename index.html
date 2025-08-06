@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+<!-- saved from url=(0045)https://moshhhhhh.github.io/Chord-dictionary/ -->
 <html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>לימוד אקורדים לפסנתר</title>
     <style>
@@ -20,6 +21,11 @@
             --gray-800: #1f2937;
             --white: #ffffff;
             --black: #000000;
+
+            /* Piano key dimensions - Adjusted for better realism */
+            --white-key-width: 45px; /* Slightly wider white keys */
+            --black-key-width: 28px; /* Proportionally sized black keys */
+            --black-key-height: 90px; /* Shorter than white keys */
         }
 
         body {
@@ -253,6 +259,104 @@
             margin-bottom: 1rem;
         }
 
+        /* --- Piano Visualization Styles --- */
+        #piano-visualization {
+            position: relative;
+            width: calc(7 * var(--white-key-width)); /* Width for one octave of white keys */
+            height: 150px; /* Adjust height as needed */
+            margin: 1.5rem auto; /* Center the piano horizontally */
+            background-color: var(--gray-800);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .key {
+            position: absolute; /* All keys will be absolutely positioned */
+            border: 1px solid var(--gray-500);
+            box-sizing: border-box;
+            border-radius: 0 0 5px 5px;
+            transition: background-color 0.1s ease-out;
+            cursor: pointer; /* Indicate interactivity */
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 5px;
+            font-size: 0.75rem;
+            user-select: none;
+        }
+
+        .white-key {
+            background-color: var(--white);
+            width: var(--white-key-width);
+            height: 100%;
+            z-index: 1;
+            border-color: var(--gray-300);
+            top: 0; /* Align white keys to the top */
+        }
+
+        .black-key {
+            background-color: var(--black);
+            width: var(--black-key-width);
+            height: var(--black-key-height);
+            z-index: 2;
+            border-color: var(--gray-600);
+            color: var(--white);
+            top: 0; /* Align black keys to the top */
+            border-radius: 0 0 3px 3px;
+        }
+
+        /* Specific positioning for white keys */
+        .white-key[data-note="C"] { left: calc(0 * var(--white-key-width)); }
+        .white-key[data-note="D"] { left: calc(1 * var(--white-key-width)); }
+        .white-key[data-note="E"] { left: calc(2 * var(--white-key-width)); }
+        .white-key[data-note="F"] { left: calc(3 * var(--white-key-width)); }
+        .white-key[data-note="G"] { left: calc(4 * var(--white-key-width)); }
+        .white-key[data-note="A"] { left: calc(5 * var(--white-key-width)); }
+        .white-key[data-note="B"] { left: calc(6 * var(--white-key-width)); }
+
+        /* Specific positioning for black keys - Adjusted for realism */
+        /* C# is positioned between C and D */
+        .black-key[data-note="C#"] { left: calc(var(--white-key-width) - var(--black-key-width) / 2); }
+        /* D# is positioned between D and E */
+        .black-key[data-note="D#"] { left: calc(2 * var(--white-key-width) - var(--black-key-width) / 2); }
+        /* F# is positioned between F and G */
+        .black-key[data-note="F#"] { left: calc(4 * var(--white-key-width) - var(--black-key-width) / 2); }
+        /* G# is positioned between G and A */
+        .black-key[data-note="G#"] { left: calc(5 * var(--white-key-width) - var(--black-key-width) / 2); }
+        /* A# is positioned between A and B */
+        .black-key[data-note="A#"] { left: calc(6 * var(--white-key-width) - var(--black-key-width) / 2); }
+
+
+        .key.highlight {
+            background-color: var(--blue-500);
+            box-shadow: 0 0 10px var(--blue-500);
+            border-color: var(--blue-700);
+        }
+        .white-key.highlight {
+            color: var(--white); /* White text on highlighted white key */
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            :root {
+                --white-key-width: 35px; /* Adjusted for tablet */
+                --black-key-width: 22px;
+                --black-key-height: 75px;
+            }
+        }
+        @media (max-width: 480px) {
+            :root {
+                --white-key-width: 30px; /* Adjusted for mobile */
+                --black-key-width: 18px;
+                --black-key-height: 60px;
+            }
+            .key {
+                font-size: 0.55rem;
+                padding-bottom: 2px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -272,7 +376,7 @@
                 <div>
                     <h3>1. תו בסיס (Root)</h3>
                     <div id="root-note-selector" class="button-grid-4">
-                        <button data-note="C" class="btn btn-secondary">C</button>
+                        <button data-note="C" class="btn btn-secondary btn-active">C</button>
                         <button data-note="D" class="btn btn-secondary">D</button>
                         <button data-note="E" class="btn btn-secondary">E</button>
                         <button data-note="F" class="btn btn-secondary">F</button>
@@ -294,7 +398,7 @@
                 <div>
                     <h3>3. סוג האקורד (Type)</h3>
                     <div id="type-selector" class="button-grid-auto">
-                        <button data-type="maj" class="btn btn-secondary">מז'ור</button>
+                        <button data-type="maj" class="btn btn-secondary btn-active">מז'ור</button>
                         <button data-type="min" class="btn btn-secondary">מינור</button>
                         <button data-type="dim" class="btn btn-secondary">מוקטן (dim)</button>
                         <button data-type="aug" class="btn btn-secondary">מוגדל (aug)</button>
@@ -324,29 +428,51 @@
                 <h2>תוצאה</h2>
                 
                 <div id="chord-display-wrapper">
-                    <span id="chord-display">בחר אקורד</span>
+                    <span id="chord-display"><span dir="ltr">C</span></span>
                 </div>
 
                 <div>
                     <h3>🎵 מרכיבי האקורד</h3>
-                    <div id="chord-notes" class="output-box">...</div>
+                    <div id="chord-notes" class="output-box">C - E - G</div>
                 </div>
 
                 <div>
                     <h3>🔄 שמות נוספים (אנהרמוניה)</h3>
-                    <div id="chord-aliases" class="output-box">...</div>
+                    <div id="chord-aliases" class="output-box">אין</div>
                 </div>
 
                 <div>
                     <h3>📖 הסבר על מבנה האקורד</h3>
-                    <div id="chord-explanation" class="output-box">...</div>
+                    <div id="chord-explanation" class="output-box">מורכב מתו בסיס, טרצה גדולה (4 חצאי טונים) וקווינטה זכה (7 חצאי טונים).</div>
+                </div>
+
+                <!-- Piano Visualization Section -->
+                <div>
+                    <h3>🎹 הצגה חזותית על פסנתר</h3>
+                    <div id="piano-visualization">
+                        <!-- White keys for one octave (C to B) -->
+                        <div class="key white-key" data-note="C">C</div>
+                        <div class="key white-key" data-note="D">D</div>
+                        <div class="key white-key" data-note="E">E</div>
+                        <div class="key white-key" data-note="F">F</div>
+                        <div class="key white-key" data-note="G">G</div>
+                        <div class="key white-key" data-note="A">A</div>
+                        <div class="key white-key" data-note="B">B</div>
+                        
+                        <!-- Black keys for one octave -->
+                        <div class="key black-key" data-note="C#">C#</div>
+                        <div class="key black-key" data-note="D#">D#</div>
+                        <div class="key black-key" data-note="F#">F#</div>
+                        <div class="key black-key" data-note="G#">G#</div>
+                        <div class="key black-key" data-note="A#">A#</div>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
 
     <!-- חלון עזרה (מודאל) -->
-    <div id="modal-backdrop">
+    <div id="modal-backdrop" class="">
         <div id="help-modal" class="card">
             <h2>אודות האפליקציה</h2>
             <p>
@@ -364,7 +490,8 @@
             <ul>
                 <li><strong>מרכיבי האקורד:</strong> התווים המדויקים שמרכיבים את האקורד.</li>
                 <li><strong>שמות נוספים:</strong> שמות אנהרמוניים לאקורד, אם קיימים.</li>
-                <li><strong>הסבר על המבנה:</strong> הנוסחה והמרווחים שיוצרים את סוג האקורד.</li>
+                <li><strong>הסבר על המבנה:</b> הנוסחה והמרווחים שיוצרים את סוג האקורד.</li>
+                <li><strong>הצגה חזותית על פסנתר:</strong> תצוגה גרפית של האקורד על קלידי הפסנתר.</li>
             </ul>
             <div style="text-align: center; font-size: 0.875rem; color: var(--gray-500); padding-top: 1rem; border-top: 1px solid var(--gray-200);">
                 <p>נוצרה עבור י.ד.</p>
@@ -381,6 +508,11 @@
                 sharp: ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'],
                 flat:  ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B']
             };
+
+            // Mapping for piano key display (always uses sharps for black keys internally for consistent visual mapping)
+            const PIANO_NOTES_ORDER = [
+                'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'
+            ];
 
             const CHORD_FORMULAS = {
                 maj:   { name: 'מז\'ור', intervals: [0, 4, 7], explanation: 'מורכב מתו בסיס, טרצה גדולה (4 חצאי טונים) וקווינטה זכה (7 חצאי טונים).' },
@@ -415,6 +547,7 @@
             const chordNotesEl = document.getElementById('chord-notes');
             const chordAliasesEl = document.getElementById('chord-aliases');
             const chordExplanationEl = document.getElementById('chord-explanation');
+            const pianoKeys = document.querySelectorAll('#piano-visualization .key');
 
             const helpBtn = document.getElementById('help-btn');
             const modalBackdrop = document.getElementById('modal-backdrop');
@@ -438,17 +571,14 @@
                     return;
                 }
 
-                // --- FIX START: Simplified and corrected scale selection logic ---
                 let useSharp;
                 if (accidental === 'b') {
                     useSharp = false;
                 } else if (accidental === '#') {
                     useSharp = true;
                 } else { // Natural root note
-                    // Convention: Use flat scale for F, sharp for others. C is neutral.
                     useSharp = root !== 'F';
                 }
-                // --- FIX END ---
 
                 const rootIndex = useSharp ? rootIndexSharp : rootIndexFlat;
                 const scale = useSharp ? NOTES.sharp : NOTES.flat;
@@ -462,9 +592,7 @@
                 
                 const chordName = `${fullRoot}${type === 'maj' ? '' : (type === 'min' ? 'm' : type)}`;
                 
-                // --- FIX START: Wrap chord name in LTR span to fix display issue ---
                 chordDisplay.innerHTML = `<span dir="ltr">${chordName}</span>`;
-                // --- FIX END ---
 
                 chordNotesEl.textContent = notes.join(' - ');
                 chordExplanationEl.textContent = formula.explanation;
@@ -478,6 +606,7 @@
                 }
 
                 updateActiveButtons();
+                highlightPianoKeys(notes); // Call new function to highlight piano keys
             }
             
             function displayError(message) {
@@ -485,6 +614,7 @@
                 chordNotesEl.textContent = message;
                 chordAliasesEl.textContent = '...';
                 chordExplanationEl.textContent = '...';
+                clearPianoHighlight(); // Clear piano on error
             }
 
             function updateActiveButtons() {
@@ -524,6 +654,34 @@
                 }
                 
                 return { root, accidental, type };
+            }
+
+            function highlightPianoKeys(notesToHighlight) {
+                // Remove all existing highlights
+                clearPianoHighlight();
+
+                // Map the notes to their piano key representation (prefer sharps for black keys)
+                const pianoNotes = notesToHighlight.map(note => {
+                    if (note === 'Db') return 'C#';
+                    if (note === 'Eb') return 'D#';
+                    if (note === 'Gb') return 'F#';
+                    if (note === 'Ab') return 'G#';
+                    if (note === 'Bb') return 'A#';
+                    return note;
+                });
+
+                // Highlight the corresponding keys
+                pianoKeys.forEach(key => {
+                    if (pianoNotes.includes(key.dataset.note)) {
+                        key.classList.add('highlight');
+                    }
+                });
+            }
+
+            function clearPianoHighlight() {
+                pianoKeys.forEach(key => {
+                    key.classList.remove('highlight');
+                });
             }
 
             rootSelector.addEventListener('click', (e) => {
@@ -579,6 +737,7 @@
                 }
             });
 
+            // Initial display update
             updateDisplay();
         });
     </script>
