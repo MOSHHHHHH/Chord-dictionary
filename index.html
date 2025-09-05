@@ -1,76 +1,55 @@
+
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מילון אקורדים דיגיטלי</title>
-    <meta name="google-site-verification" content="8RDNgkyI2spVbAeHNSXP6lpThfS8Xb0E3z7HhBmc8fo" />
-    <style>
-        /* --- הגדרות כלליות ואיפוס --- */
-        :root {
-            --blue-500: #3b82f6;
-            --blue-600: #2563eb;
-            --blue-700: #1d4ed8;
-            --blue-50: #eff6ff;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-300: #d1d5db;
-            --gray-500: #6b7280;
-            --gray-600: #4b5563;
-            --gray-700: #374151;
-            --gray-800: #1f2937;
-            --white: #ffffff;
-            --black: #000000;
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>מילון אקורדים דיגיטלי | למד כל אקורד בקלות</title>
 
-            /* Piano key dimensions - Adjusted for better realism */
-            --white-key-width: 45px; /* Slightly wider white keys */
-            --black-key-width: 28px; /* Proportionally sized black keys */
-            --black-key-height: 90px; /* Shorter than white keys */
+    <!-- Primary SEO Meta Tags -->
+    <meta name="description" content="מילון אקורדים דיגיטלי אינטראקטיבי ללימוד תיאוריה מוזיקלית. מצא כל אקורד, ראה את התווים המרכיבים אותו, ולמד כיצד לנגן אותו על פסנתר." />
+    <meta name="keywords" content="אקורדים, מילון אקורדים, תיאוריה מוזיקלית, לימוד נגינה, פסנתר, גיטרה, תווים, אקורד מז'ור, אקורד מינור" />
+    <meta name="author" content="Gemini" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="8RDNgkyI2spVbAeHNSXP6lpThfS8Xb0E3z7HhBmc8fo" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="מילון אקורדים דיגיטלי | למד כל אקורד בקלות" />
+    <meta property="og:description" content="גלה, למד והצג כל אקורד על פסנתר וירטואלי. כלי אינטראקטיבי חיוני למוזיקאים." />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:title" content="מילון אקורדים דיגיטלי | למד כל אקורד בקלות" />
+    <meta property="twitter:description" content="גלה, למד והצג כל אקורד על פסנתר וירטואלי. כלי אינטראקטיבי חיוני למוזיקאים." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue-50: #eff6ff; --blue-500: #3b82f6; --blue-600: #2563eb; --blue-700: #1d4ed8;
+            --gray-100: #f3f4f6; --gray-200: #e5e7eb; --gray-300: #d1d5db; --gray-500: #6b7280;
+            --gray-700: #374151; --gray-800: #1f2937; --white: #ffffff; --black: #000000;
+            --red-600: #dc2626;
         }
-        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            font-family: 'Assistant', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #f0f2f5;
             color: var(--gray-800);
             margin: 0;
             padding: 1rem;
         }
+        * { box-sizing: border-box; }
+        .container { max-width: 56rem; margin: 0 auto; }
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+        h1 { font-size: 2.25rem; font-weight: 700; color: var(--gray-800); }
+        main { display: grid; gap: 2rem; }
+        @media (min-width: 1024px) { main { grid-template-columns: 1fr 1fr; } }
 
-        * {
-            box-sizing: border-box;
-        }
-
-        /* --- מבנה כללי --- */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-        
-        h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--gray-800);
-        }
-
-        main {
-            display: grid;
-            gap: 2rem;
-        }
-
-        @media (min-width: 1024px) {
-            main {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        /* --- כרטיסיות --- */
+        /* --- Cards --- */
         .card {
             background-color: var(--white);
             padding: 1.5rem;
@@ -80,681 +59,475 @@
             flex-direction: column;
             gap: 1.5rem;
         }
-        
         .card h2 {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--gray-700);
             border-bottom: 2px solid var(--gray-100);
             padding-bottom: 0.5rem;
-            margin: -1.5rem -1.5rem 0 -1.5rem;
-            padding: 0 1.5rem 0.5rem 1.5rem;
+            margin: -1.5rem -1.5rem 0;
+            padding: 0 1.5rem 0.5rem;
         }
+        .card h3 { font-weight: 600; font-size: 1.125rem; margin-bottom: 0.75rem; }
 
-        .card h3 {
-            font-weight: 600;
-            font-size: 1.125rem;
-            margin-bottom: 0.75rem;
-        }
-
-        /* --- כפתורים --- */
+        /* --- Buttons --- */
         .btn {
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
+            padding: 0.65rem 0.75rem;
+            border-radius: 0.375rem;
             border: none;
-            font-size: 1rem;
+            font-size: 0.875rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease-in-out;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
         }
-        .btn:focus {
-            outline: 2px solid var(--blue-500);
-            outline-offset: 2px;
-        }
+        .btn:focus { outline: 2px solid var(--blue-500); outline-offset: 2px; }
 
-        .btn-primary {
-            background-color: var(--blue-500);
-            color: var(--white);
-        }
-        .btn-primary:hover {
-            background-color: var(--blue-600);
-        }
-
-        .btn-secondary {
+        .btn-group button {
             background-color: var(--gray-200);
             color: var(--gray-800);
         }
-        .btn-secondary:hover {
-            background-color: var(--gray-300);
-        }
-
-        .btn-active {
+        .btn-group button:hover { background-color: var(--gray-300); }
+        .btn-group button.btn-active {
             background-color: var(--blue-600);
             color: var(--white);
             transform: translateY(-2px);
-            box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--blue-500);
-        }
-
-        #help-btn {
-            background-color: var(--white);
-            border-radius: 9999px;
-            width: 2.5rem;
-            height: 2.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--blue-500);
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-        #help-btn:hover {
-            transform: scale(1.1);
         }
 
-        /* --- רשתות כפתורים וקלט --- */
-        .button-grid-4 {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.5rem;
-        }
-        .button-grid-auto {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-            gap: 0.5rem;
-        }
-        .flex-group {
-            display: flex;
-            gap: 0.75rem;
-        }
-        #manual-input {
-            flex-grow: 1;
-            padding: 0.5rem 0.75rem;
-            border: 2px solid var(--gray-300);
-            border-radius: 0.5rem;
-            transition: border-color 0.2s;
-            font-size: 1rem;
-        }
-        #manual-input:focus {
-            outline: none;
-            border-color: var(--blue-500);
-        }
-
-        /* --- אזור הפלט --- */
-        #chord-display-wrapper {
-            text-align: center;
-            background-color: var(--blue-50);
-            padding: 1rem;
-            border-radius: 0.5rem;
-        }
-        #chord-display {
-            font-size: 2.25rem;
-            font-weight: 700;
-            color: var(--blue-700);
-        }
-        .output-box {
-            background-color: var(--gray-100);
-            padding: 1rem;
-            border-radius: 0.375rem;
-            min-height: 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            line-height: 1.6;
-        }
-        #chord-notes {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--gray-800);
-            direction: ltr;
-        }
-        #chord-aliases {
-            font-size: 1.125rem;
-            color: var(--gray-700);
-            direction: ltr;
-        }
-         #chord-explanation {
-            font-size: 1.1rem;
-            color: var(--gray-700);
-        }
-        
-        /* --- חלון עזרה (מודאל) --- */
-        #modal-backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0s 0.3s;
-            z-index: 100;
-        }
-        #modal-backdrop.visible {
-            opacity: 1;
-            visibility: visible;
-            transition: opacity 0.3s ease;
-        }
-        #help-modal {
-            max-width: 500px;
-            width: 90%;
-            transform: scale(0.95);
-            transition: transform 0.3s ease;
-        }
-        #modal-backdrop.visible #help-modal {
-            transform: scale(1);
-        }
-        #help-modal ul {
-            list-style-position: inside;
-            padding-right: 0.5rem;
-        }
-        #help-modal p, #help-modal ul {
-            color: var(--gray-700);
-            margin-bottom: 1rem;
-        }
-
-        /* --- Piano Visualization Styles --- */
-        #piano-visualization {
-            position: relative;
-            width: calc(7 * var(--white-key-width)); /* Width for one octave of white keys */
-            height: 150px; /* Adjust height as needed */
-            margin: 1.5rem auto; /* Center the piano horizontally */
-            background-color: var(--gray-800);
-            border-radius: 0.5rem;
-            overflow: hidden;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .key {
-            position: absolute; /* All keys will be absolutely positioned */
-            border: 1px solid var(--gray-500);
-            box-sizing: border-box;
-            border-radius: 0 0 5px 5px;
-            transition: background-color 0.1s ease-out;
-            cursor: pointer; /* Indicate interactivity */
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            padding-bottom: 5px;
-            font-size: 0.75rem;
-            user-select: none;
-        }
-
-        .white-key {
+        #header-controls { display: flex; align-items: center; gap: 0.5rem; }
+        #note-naming-toggle, #help-btn {
+            width: 2.5rem; height: 2.5rem;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 600;
             background-color: var(--white);
-            width: var(--white-key-width);
-            height: 100%;
-            z-index: 1;
-            border-color: var(--gray-300);
-            top: 0; /* Align white keys to the top */
+            color: var(--blue-600);
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            transition: transform 0.2s, background-color 0.2s;
         }
+        #note-naming-toggle { font-size: 0.75rem; width: auto; padding: 0 0.75rem; }
+        #help-btn { font-size: 1.5rem; }
+        #note-naming-toggle:hover, #help-btn:hover { transform: scale(1.1); background-color: var(--gray-100); }
+        
+        /* --- Input --- */
+        .button-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+        .button-grid-auto { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 0.5rem; }
+        .flex-group { display: flex; gap: 0.75rem; }
 
+        #manual-input {
+            flex-grow: 1; padding: 0.65rem; border: 2px solid var(--gray-300); border-radius: 0.375rem;
+            transition: border-color 0.2s; font-size: 1rem;
+        }
+        #manual-input:focus { outline: none; border-color: var(--blue-500); }
+        #manual-submit { background-color: var(--blue-500); color: var(--white); }
+        #manual-submit:hover { background-color: var(--blue-600); }
+
+        /* --- Output --- */
+        #chord-display-wrapper { text-align: center; background-color: var(--blue-50); padding: 1rem; border-radius: 0.5rem; }
+        #chord-display { font-size: 2.5rem; font-weight: 700; color: var(--blue-700); letter-spacing: 0.05em; }
+        .output-box-title { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .output-box-title span { font-size: 1.25rem; }
+        .output-box-content {
+            background-color: var(--gray-100); padding: 1rem; border-radius: 0.375rem; min-height: 3rem;
+            display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.6;
+        }
+        #chord-notes { font-size: 1.5rem; font-weight: 700; letter-spacing: 0.1em; }
+        #chord-aliases { font-size: 1.125rem; color: var(--gray-700); }
+        #chord-explanation { text-align: right; }
+        .error-display { text-align: center; }
+        .error-display .emoji { font-size: 3rem; margin-bottom: 1rem; }
+        .error-display .title { font-size: 1.5rem; font-weight: 700; color: var(--red-600); }
+        .error-display .message { color: var(--gray-700); margin-top: 0.5rem; }
+
+        /* --- Piano --- */
+        #piano-visualization {
+            position: relative; width: 100%; height: 10rem; background-color: var(--gray-800);
+            border-radius: 0.5rem; box-shadow: inset 0 0 10px rgba(0,0,0,0.5); padding: 0.5rem; user-select: none;
+        }
+        .key {
+            position: absolute; border-radius: 0 0 5px 5px; border: 1px solid var(--gray-500);
+            display: flex; justify-content: center; align-items: flex-end; padding-bottom: 0.25rem;
+            font-size: 0.75rem; transition: background-color 0.1s ease-out;
+        }
+        .white-key {
+            width: calc(100% / 7); height: 100%; top: 0; background-color: var(--white); color: var(--black); z-index: 1;
+        }
         .black-key {
-            background-color: var(--black);
-            width: var(--black-key-width);
-            height: var(--black-key-height);
-            z-index: 2;
-            border-color: var(--gray-600);
-            color: var(--white);
-            top: 0; /* Align black keys to the top */
-            border-radius: 0 0 3px 3px;
+            width: calc(100% / 14); height: 60%; top: 0; background-color: var(--black); color: var(--white); z-index: 2;
+            transform: translateX(-50%);
+        }
+        .key.highlight { background-color: var(--blue-500); border-color: var(--blue-700); }
+        .white-key.highlight { color: var(--white); }
+
+        #piano-visualization.solfege-mode .key {
+            font-size: 0.6rem;
+            padding-bottom: 0.4rem; 
         }
 
-        /* Specific positioning for white keys */
-        .white-key[data-note="C"] { left: calc(0 * var(--white-key-width)); }
-        .white-key[data-note="D"] { left: calc(1 * var(--white-key-width)); }
-        .white-key[data-note="E"] { left: calc(2 * var(--white-key-width)); }
-        .white-key[data-note="F"] { left: calc(3 * var(--white-key-width)); }
-        .white-key[data-note="G"] { left: calc(4 * var(--white-key-width)); }
-        .white-key[data-note="A"] { left: calc(5 * var(--white-key-width)); }
-        .white-key[data-note="B"] { left: calc(6 * var(--white-key-width)); }
-
-        /* Specific positioning for black keys - Adjusted for realism */
-        .black-key[data-note="C#"] { left: calc(var(--white-key-width) - var(--black-key-width) / 2); }
-        .black-key[data-note="D#"] { left: calc(2 * var(--white-key-width) - var(--black-key-width) / 2); }
-        .black-key[data-note="F#"] { left: calc(4 * var(--white-key-width) - var(--black-key-width) / 2); }
-        .black-key[data-note="G#"] { left: calc(5 * var(--white-key-width) - var(--black-key-width) / 2); }
-        .black-key[data-note="A#"] { left: calc(6 * var(--white-key-width) - var(--black-key-width) / 2); }
-
-        .key.highlight {
-            background-color: var(--blue-500);
-            box-shadow: 0 0 10px var(--blue-500);
-            border-color: var(--blue-700);
+        /* --- Modal --- */
+        #modal-backdrop {
+            position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.5);
+            display: flex; align-items: center; justify-content: center; z-index: 100;
+            opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0s 0.3s;
         }
-        .white-key.highlight {
-            color: var(--white); /* White text on highlighted white key */
+        #modal-backdrop.visible { opacity: 1; visibility: visible; transition-delay: 0s; }
+        #help-modal {
+            max-width: 500px; width: 90%; transform: scale(0.95); transition: transform 0.3s ease;
         }
-
-        /* Responsive adjustments for smaller screens */
-        @media (max-width: 768px) {
-            :root {
-                --white-key-width: 35px; /* Adjusted for tablet */
-                --black-key-width: 22px;
-                --black-key-height: 75px;
-            }
-             main {
-                grid-template-columns: 1fr;
-            }
-        }
-        @media (max-width: 480px) {
-            :root {
-                --white-key-width: 30px; /* Adjusted for mobile */
-                --black-key-width: 18px;
-                --black-key-height: 60px;
-            }
-            .key {
-                font-size: 0.55rem;
-                padding-bottom: 2px;
-            }
-            h1 { font-size: 1.75rem; }
-            .card h2 { font-size: 1.25rem; }
-            #chord-display { font-size: 1.75rem; }
-            #chord-notes { font-size: 1.25rem; }
-        }
+        #modal-backdrop.visible #help-modal { transform: scale(1); }
+        #help-modal ul { list-style-position: inside; padding-right: 0.5rem; }
+        #help-modal p, #help-modal ul { color: var(--gray-700); margin-bottom: 1rem; }
+        #close-modal-btn { width: 100%; margin-top: 1rem; background-color: var(--blue-500); color: var(--white); }
+        #close-modal-btn:hover { background-color: var(--blue-600); }
 
     </style>
 </head>
 <body>
-
     <div class="container">
-        <!-- כותרת ראשית וכפתור עזרה -->
         <header>
             <h1>מילון אקורדים דיגיטלי</h1>
-            <button id="help-btn">?</button>
+            <div id="header-controls">
+                <button id="note-naming-toggle" class="btn" title="החלף שיטת סימון תווים">דו רה מי</button>
+                <button id="help-btn" class="btn">?</button>
+            </div>
         </header>
 
         <main>
-            <!-- אזור הקלט -->
-            <div id="input-area" class="card">
+            <!-- Input Area -->
+            <div class="card">
                 <h2>בחירת אקורד</h2>
-                
                 <div>
                     <h3>1. תו בסיס (Root)</h3>
-                    <div id="root-note-selector" class="button-grid-4">
-                        <button data-note="C" class="btn btn-secondary btn-active">C</button>
-                        <button data-note="D" class="btn btn-secondary">D</button>
-                        <button data-note="E" class="btn btn-secondary">E</button>
-                        <button data-note="F" class="btn btn-secondary">F</button>
-                        <button data-note="G" class="btn btn-secondary">G</button>
-                        <button data-note="A" class="btn btn-secondary">A</button>
-                        <button data-note="B" class="btn btn-secondary">B</button>
+                    <div id="root-note-selector" class="button-grid-4 btn-group">
+                        <button data-note="C" class="btn">C</button> <button data-note="D" class="btn">D</button>
+                        <button data-note="E" class="btn">E</button> <button data-note="F" class="btn">F</button>
+                        <button data-note="G" class="btn">G</button> <button data-note="A" class="btn">A</button>
+                        <button data-note="B" class="btn">B</button>
                     </div>
                 </div>
-
                 <div>
                     <h3>2. סימני היתק (Accidentals)</h3>
-                    <div id="accidental-selector" class="flex-group">
-                        <button data-accidental="" class="btn btn-secondary">רגיל</button>
-                        <button data-accidental="b" class="btn btn-secondary">♭ (במול)</button>
-                        <button data-accidental="#" class="btn btn-secondary">♯ (דיאז)</button>
+                    <div id="accidental-selector" class="flex-group btn-group">
+                        <button data-accidental="" class="btn">רגיל</button>
+                        <button data-accidental="b" class="btn">♭ (במול)</button>
+                        <button data-accidental="#" class="btn">♯ (דיאז)</button>
                     </div>
                 </div>
-
                 <div>
                     <h3>3. סוג האקורד (Type)</h3>
-                    <div id="type-selector" class="button-grid-auto">
-                        <button data-type="maj" class="btn btn-secondary btn-active">מז'ור</button>
-                        <button data-type="min" class="btn btn-secondary">מינור</button>
-                        <button data-type="dim" class="btn btn-secondary">מוקטן (dim)</button>
-                        <button data-type="aug" class="btn btn-secondary">מוגדל (aug)</button>
-                        <button data-type="7" class="btn btn-secondary">7</button>
-                        <button data-type="maj7" class="btn btn-secondary">Maj7</button>
-                        <button data-type="min7" class="btn btn-secondary">m7</button>
-                        <button data-type="sus2" class="btn btn-secondary">sus2</button>
-                        <button data-type="sus4" class="btn btn-secondary">sus4</button>
-                        <button data-type="6" class="btn btn-secondary">6</button>
-                        <button data-type="m6" class="btn btn-secondary">m6</button>
-                        <button data-type="dim7" class="btn btn-secondary">dim7</button>
-                        <button data-type="m7b5" class="btn btn-secondary">m7b5</button>
+                    <div id="type-selector" class="button-grid-auto btn-group">
+                        <button data-type="maj" class="btn">מז'ור</button> <button data-type="min" class="btn">מינור</button>
+                        <button data-type="dim" class="btn">מוקטן (dim)</button> <button data-type="aug" class="btn">מוגדל (aug)</button>
+                        <button data-type="7" class="btn">7</button> <button data-type="maj7" class="btn">Maj7</button>
+                        <button data-type="min7" class="btn">m7</button> <button data-type="sus2" class="btn">sus2</button>
+                        <button data-type="sus4" class="btn">sus4</button> <button data-type="6" class="btn">6</button>
+                        <button data-type="m6" class="btn">m6</button> <button data-type="dim7" class="btn">dim7</button>
+                        <button data-type="m7b5" class="btn">m7b5</button>
                     </div>
                 </div>
-                
                 <div style="border-top: 2px solid var(--gray-100); padding-top: 1.5rem;">
-                     <h3>או: הקלדה ידנית</h3>
-                     <div class="flex-group">
-                         <input type="text" id="manual-input" placeholder="לדוגמה: C#m7 או Gb">
-                         <button id="manual-submit" class="btn btn-primary">הצג</button>
-                     </div>
+                    <h3>או: הקלדה ידנית</h3>
+                    <div class="flex-group">
+                        <input type="text" id="manual-input" placeholder="לדוגמה: C#m7 או Gb">
+                        <button id="manual-submit" class="btn">הצג</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- אזור הפלט -->
+            <!-- Output Area -->
             <div id="output-area" class="card">
                 <h2>תוצאה</h2>
-                
-                <div id="chord-display-wrapper">
-                    <span id="chord-display"><span dir="ltr">C</span></span>
-                </div>
-
-                <div>
-                    <h3>🎵 מרכיבי האקורד</h3>
-                    <div id="chord-notes" class="output-box">C - E - G</div>
-                </div>
-
-                <div>
-                    <h3>🔄 שמות וסימונים נוספים</h3>
-                    <div id="chord-aliases" class="output-box">CM</div>
-                </div>
-
-                <div>
-                    <h3>📖 הסבר על מבנה האקורד</h3>
-                    <div id="chord-explanation" class="output-box">אקורד מז'ורי, בעל צליל 'שמח' ויציב. בנוי מתו בסיס, טרצה גדולה (מרווח של 4 חצאי טונים מהבסיס) וקווינטה זכה (7 חצאי טונים מהבסיס). זהו האקורד הבסיסי והנפוץ ביותר במוזיקה המערבית.</div>
-                </div>
-
-                <!-- Piano Visualization Section -->
-                <div>
-                    <h3>🎹 הצגה חזותית על פסנתר</h3>
-                    <div id="piano-visualization">
-                        <!-- White keys for one octave (C to B) -->
-                        <div class="key white-key" data-note="C">C</div>
-                        <div class="key white-key" data-note="D">D</div>
-                        <div class="key white-key" data-note="E">E</div>
-                        <div class="key white-key" data-note="F">F</div>
-                        <div class="key white-key" data-note="G">G</div>
-                        <div class="key white-key" data-note="A">A</div>
-                        <div class="key white-key" data-note="B">B</div>
-                        
-                        <!-- Black keys for one octave -->
-                        <div class="key black-key" data-note="C#">C#</div>
-                        <div class="key black-key" data-note="D#">D#</div>
-                        <div class="key black-key" data-note="F#">F#</div>
-                        <div class="key black-key" data-note="G#">G#</div>
-                        <div class="key black-key" data-note="A#">A#</div>
-                    </div>
-                </div>
+                <!-- Content is generated by JavaScript -->
             </div>
         </main>
     </div>
 
-    <!-- חלון עזרה (מודאל) -->
+    <!-- Help Modal -->
     <div id="modal-backdrop">
         <div id="help-modal" class="card">
             <h2>אודות האפליקציה</h2>
-            <p>
-                ברוכים הבאים לאפליקציה ללימוד אקורדים!
-                <br>
-                כאן תוכלו ללמוד כיצד לבנות כל אקורד נפוץ.
-            </p>
+            <p>ברוכים הבאים לאפליקציה ללימוד אקורדים!<br>כאן תוכלו ללמוד כיצד לבנות כל אקורד נפוץ.</p>
             <h3>איך משתמשים?</h3>
             <p>
-                <strong>בחירה לפי רכיבים:</strong> בחרו את תו הבסיס, סימן היתק (במול/דיאז) וסוג האקורד. התוצאה תתעדכן אוטומטית.
-                <br>
-                <strong>הקלדה ידנית:</strong> כתבו את שם האקורד המלא בתיבת הטקסט (לדוגמה: F#m7, Bb, Dsus4) ולחצו "הצג".
+                <strong>בחירה לפי רכיבים:</strong> בחרו את תו הבסיס, סימן היתק וסוג האקורד. התוצאה תתעדכן אוטומטית.<br>
+                <strong>הקלדה ידנית:</strong> כתבו את שם האקורד המלא (לדוגמה: F#m7) ולחצו "הצג".
             </p>
-             <h3>מה רואים בתוצאה?</h3>
-            <ul>
+            <h3>מה רואים בתוצאה?</h3>
+            <ul class="list-disc list-inside space-y-1">
                 <li><strong>מרכיבי האקורד:</strong> התווים המדויקים שמרכיבים את האקורד.</li>
-                <li><strong>שמות נוספים:</strong> שמות וסימונים חלופיים לאקורד, כולל שמות אנהרמוניים.</li>
+                <li><strong>שמות נוספים:</strong> סימונים חלופיים לאקורד, כולל שמות אנהרמוניים.</li>
                 <li><strong>הסבר על המבנה:</strong> פירוט על הנוסחה, המרווחים והאופי של האקורד.</li>
                 <li><strong>הצגה חזותית על פסנתר:</strong> תצוגה גרפית של האקורד על קלידי הפסנתר.</li>
             </ul>
             <div style="text-align: center; font-size: 0.875rem; color: var(--gray-500); padding-top: 1rem; border-top: 1px solid var(--gray-200);">
                 <p>פותח באמצעות Gemini 🛡️</p>
             </div>
-            <button id="close-modal-btn" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">הבנתי, תודה!</button>
+            <button id="close-modal-btn" class="btn">הבנתי, תודה!</button>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- הגדרות ונתונים ---
-            const NOTES = {
-                sharp: ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'],
-                flat:  ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B']
-            };
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- DATA CONSTANTS ---
+        const NOTES = {
+            sharp: ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'],
+            flat:  ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B']
+        };
+        const CHORD_FORMULAS = {
+            maj:   { name: 'מז\'ור', intervals: [0, 4, 7], aliases: ['', 'M'], explanation: "אקורד מז'ורי, בעל צליל 'שמח' ויציב. בנוי מתו בסיס, טרצה גדולה (4 חצאי טונים) וקווינטה זכה (7 חצאי טונים)." },
+            min:   { name: 'מינור', intervals: [0, 3, 7], aliases: ['m', 'min', '-'], explanation: "אקורד מינורי, בעל צליל 'עצוב' או 'נוגה'. בנוי מתו בסיס, טרצה קטנה (3 חצאי טונים) וקווינטה זכה (7 חצאי טונים)." },
+            dim:   { name: 'מוקטן (diminished)', intervals: [0, 3, 6], aliases: ['dim', '°'], explanation: "אקורד מוקטן, בעל צליל מתוח וחסר יציבות. בנוי מתו בסיס, טרצה קטנה (3 חצאי טונים) וקווינטה מוקטנת (6 חצאי טונים)." },
+            aug:   { name: 'מוגדל (augmented)', intervals: [0, 4, 8], aliases: ['aug', '+', '+5'], explanation: "אקורד מוגדל, בעל צליל 'חולמני' או מתוח. בנוי מתו בסיס, טרצה גדולה (4 חצאי טונים) וקווינטה מוגדלת (8 חצאי טונים)." },
+            '7':     { name: 'דומיננטי (7)', intervals: [0, 4, 7, 10], aliases: ['7', 'dom7'], explanation: "אקורד דומיננטי 7, אקורד מז'ורי עם תוספת של ספטימה קטנה (10 חצאי טונים). בעל צליל עשיר ומלא מתח ש'רוצה להיפתר' לאקורד הטוניקה." },
+            maj7:  { name: 'מז\'ור 7', intervals: [0, 4, 7, 11], aliases: ['maj7', 'M7', 'Δ7'], explanation: "אקורד מז'ור 7, אקורד מז'ורי עם תוספת של ספטימה גדולה (11 חצאי טונים). בעל צליל 'רך', 'עשיר' ו'חולמני'." },
+            min7:  { name: 'מינור 7', intervals: [0, 3, 7, 10], aliases: ['m7', 'min7', '-7'], explanation: "אקורד מינור 7, אקורד מינורי עם תוספת של ספטימה קטנה (10 חצאי טונים). בעל צליל 'חלק' ו'מתוחכם'." },
+            sus2:  { name: 'sus2', intervals: [0, 2, 7], aliases: ['sus2'], explanation: "אקורד מושהה (sus) בו הטרצה מוחלפת בדרגה השנייה. יוצר צליל פתוח, אוורירי וחסר 'אופי' מז'ורי/מינורי." },
+            sus4:  { name: 'sus4', intervals: [0, 5, 7], aliases: ['sus4', 'sus'], explanation: "אקורד מושהה (sus) בו הטרצה מוחלפת בדרגה הרביעית. יוצר מתח ששואף להיפתר חזרה לאקורד המקורי." },
+            '6':     { name: 'מז\'ור 6', intervals: [0, 4, 7, 9], aliases: ['6', 'M6'], explanation: "אקורד מז'ור 6, אקורד מז'ורי עם תוספת של סקסטה גדולה (9 חצאי טונים). בעל צליל 'מתוק' ונוסטלגי." },
+            m6:    { name: 'מינור 6', intervals: [0, 3, 7, 9], aliases: ['m6', 'min6', '-6'], explanation: "אקורד מינור 6, אקורד מינורי עם תוספת של סקסטה גדולה (9 חצאי טונים). בעל צליל מורכב ומתוחכם." },
+            dim7:  { name: 'מוקטן 7', intervals: [0, 3, 6, 9], aliases: ['dim7', '°7'], explanation: "אקורד מוקטן 7, אקורד מוקטן עם תוספת של ספטימה מוקטנת (9 חצאי טונים). אקורד סימטרי ובעל מתח גבוה מאוד." },
+            m7b5:  { name: 'חצי מוקטן (m7b5)', intervals: [0, 3, 6, 10], aliases: ['m7b5', 'ø', 'ø7'], explanation: "אקורד חצי מוקטן (מינור 7 עם קווינטה מונמכת), אקורד מוקטן עם ספטימה קטנה (10 חצאי טונים). נפוץ במהלך ii-V-I בסולם מינורי." }
+        };
+        const ENHARMONICS = {
+            'C#': 'Db', 'Db': 'C#', 'D#': 'Eb', 'Eb': 'D#', 'F#': 'Gb', 'Gb': 'F#',
+            'G#': 'Ab', 'Ab': 'G#', 'A#': 'Bb', 'Bb': 'A#'
+        };
+        const SOLFEGE_MAP = {
+            'C': 'דו', 'D': 'רה', 'E': 'מי', 'F': 'פה', 'G': 'סול', 'A': 'לה', 'B': 'סי'
+        };
+        const PIANO_KEYS = [
+            { name: 'C', type: 'white' }, { name: 'C#', type: 'black' },
+            { name: 'D', type: 'white' }, { name: 'D#', type: 'black' },
+            { name: 'E', type: 'white' },
+            { name: 'F', type: 'white' }, { name: 'F#', type: 'black' },
+            { name: 'G', type: 'white' }, { name: 'G#', type: 'black' },
+            { name: 'A', type: 'white' }, { name: 'A#', type: 'black' },
+            { name: 'B', type: 'white' }
+        ];
 
-            const CHORD_FORMULAS = {
-                maj:   { name: 'מז\'ור', intervals: [0, 4, 7], aliases: ['', 'M'], explanation: "אקורד מז'ורי, בעל צליל 'שמח' ויציב. בנוי מתו בסיס, טרצה גדולה (מרווח של 4 חצאי טונים מהבסיס) וקווינטה זכה (7 חצאי טונים מהבסיס). זהו האקורד הבסיסי והנפוץ ביותר במוזיקה המערבית." },
-                min:   { name: 'מינור', intervals: [0, 3, 7], aliases: ['m', 'min', '-'], explanation: "אקורד מינורי, בעל צליל 'עצוב' או 'נוגה'. בנוי מתו בסיס, טרצה קטנה (3 חצאי טונים) וקווינטה זכה (7 חצאי טונים). ההבדל היחיד בינו לבין אקורד מז'ור הוא הנמכת הטרצה בחצי טון." },
-                dim:   { name: 'מוקטן (diminished)', intervals: [0, 3, 6], aliases: ['dim', '°'], explanation: "אקורד מוקטן (דימינישד), בעל צליל מתוח וחסר יציבות. בנוי משתי טרצות קטנות זו על גבי זו: תו בסיס, טרצה קטנה (3 חצאי טונים) וקווינטה מוקטנת (6 חצאי טונים)." },
-                aug:   { name: 'מוגדל (augmented)', intervals: [0, 4, 8], aliases: ['aug', '+', '+5'], explanation: "אקורד מוגדל (אוגמנטד), בעל צליל 'חולמני' או מתוח. בנוי משתי טרצות גדולות זו על גבי זו: תו בסיס, טרצה גדולה (4 חצאי טונים) וקווינטה מוגדלת (8 חצאי טונים)." },
-                '7':     { name: 'דומיננטי (7)', intervals: [0, 4, 7, 10], aliases: ['7', 'dom7'], explanation: "אקורד דומיננטי 7, אקורד מז'ורי עם תוספת של ספטימה קטנה (10 חצאי טונים). בעל צליל עשיר ומלא מתח ש'רוצה להיפתר' לאקורד הטוניקה. נפוץ מאוד בבלוז וג'אז." },
-                maj7:  { name: 'מז\'ור 7', intervals: [0, 4, 7, 11], aliases: ['maj7', 'M7', 'Δ7'], explanation: "אקורד מז'ור 7, אקורד מז'ורי עם תוספת של ספטימה גדולה (11 חצאי טונים). בעל צליל 'רך', 'עשיר' ו'חולמני'. נפוץ בג'אז, פופ ובלדות." },
-                min7:  { name: 'מינור 7', intervals: [0, 3, 7, 10], aliases: ['m7', 'min7', '-7'], explanation: "אקורד מינור 7, אקורד מינורי עם תוספת של ספטימה קטנה (10 חצאי טונים). בעל צליל 'חלק', 'מתוחכם' ופחות 'עצוב' מהאקורד המינורי הרגיל." },
-                sus2:  { name: 'sus2', intervals: [0, 2, 7], aliases: ['sus2'], explanation: "אקורד מושהה (sus) בו הדרגה השלישית (הטרצה) מוחלפת בדרגה השנייה (סקונדה גדולה, 2 חצאי טונים). יוצר צליל פתוח, אוורירי וחסר 'אופי' מז'ורי/מינורי מובהק." },
-                sus4:  { name: 'sus4', intervals: [0, 5, 7], aliases: ['sus4', 'sus'], explanation: "אקורד מושהה (sus) בו הדרגה השלישית (הטרצה) מוחלפת בדרגה הרביעית (קוורטה זכה, 5 חצאי טונים). יוצר מתח ששואף להיפתר חזרה לאקורד המקורי (בדרך כלל מז'ור)." },
-                '6':     { name: 'מז\'ור 6', intervals: [0, 4, 7, 9], aliases: ['6', 'M6'], explanation: "אקורד מז'ור 6, אקורד מז'ורי עם תוספת של סקסטה גדולה (9 חצאי טונים). בעל צליל 'מתוק' ונוסטלגי, נפוץ במוזיקת ג'אז וסווינג ישנה." },
-                m6:    { name: 'מינור 6', intervals: [0, 3, 7, 9], aliases: ['m6', 'min6', '-6'], explanation: "אקורד מינור 6, אקורד מינורי עם תוספת של סקסטה גדולה (9 חצאי טונים). בעל צליל מורכב ומתוחכם, לעיתים קרובות משמש באלתורי ג'אז." },
-                dim7:  { name: 'מוקטן 7', intervals: [0, 3, 6, 9], aliases: ['dim7', '°7'], explanation: "אקורד מוקטן 7, אקורד מוקטן עם תוספת של ספטימה מוקטנת (9 חצאי טונים). זהו אקורד סימטרי (כל המרווחים הם טרצות קטנות) ובעל מתח גבוה מאוד." },
-                m7b5:  { name: 'חצי מוקטן (m7b5)', intervals: [0, 3, 6, 10], aliases: ['m7b5', 'ø', 'ø7'], explanation: "אקורד חצי מוקטן (מינור 7 עם קווינטה מונמכת), אקורד מוקטן עם תוספת של ספטימה קטנה (10 חצאי טונים). בעל צליל מתוח אך פחות 'צורם' מה-dim7. נפוץ מאוד במהלך ה-ii-V-I בסולם מינורי." }
-            };
+        // --- STATE ---
+        let currentChord = { root: 'C', accidental: '', type: 'maj' };
+        let noteNaming = 'letters'; // 'letters' or 'solfege'
 
-            const ENHARMONICS = {
-                'C#': 'Db', 'Db': 'C#', 'D#': 'Eb', 'Eb': 'D#', 'F#': 'Gb', 'Gb': 'F#',
-                'G#': 'Ab', 'Ab': 'G#', 'A#': 'Bb', 'Bb': 'A#'
-            };
+        // --- DOM ELEMENTS ---
+        const rootSelector = document.getElementById('root-note-selector');
+        const accidentalSelector = document.getElementById('accidental-selector');
+        const typeSelector = document.getElementById('type-selector');
+        const manualInput = document.getElementById('manual-input');
+        const manualSubmit = document.getElementById('manual-submit');
+        const outputArea = document.getElementById('output-area');
+        const noteNamingToggle = document.getElementById('note-naming-toggle');
+        const helpBtn = document.getElementById('help-btn');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const closeModalBtn = document.getElementById('close-modal-btn');
 
-            let currentChord = { root: 'C', accidental: '', type: 'maj' };
+        // --- CORE LOGIC ---
+        function calculateChordInfo(chord) {
+            const { root, accidental, type } = chord;
+            const fullRoot = root + accidental;
+            const formula = CHORD_FORMULAS[type];
+            if (!formula) throw new Error('סוג אקורד לא ידוע.');
 
-            const rootSelector = document.getElementById('root-note-selector');
-            const accidentalSelector = document.getElementById('accidental-selector');
-            const typeSelector = document.getElementById('type-selector');
-            const manualInput = document.getElementById('manual-input');
-            const manualSubmit = document.getElementById('manual-submit');
+            const rootIndexSharp = NOTES.sharp.indexOf(fullRoot);
+            const rootIndexFlat = NOTES.flat.indexOf(fullRoot);
+            if (rootIndexSharp === -1 && rootIndexFlat === -1) throw new Error('תו בסיס לא תקין.');
+
+            const useSharp = accidental === '#' || (accidental === '' && !['F', 'C'].includes(root));
+            const rootIndex = useSharp ? rootIndexSharp : rootIndexFlat;
+            const scale = useSharp ? NOTES.sharp : NOTES.flat;
+
+            if (rootIndex === -1) throw new Error(`תו בסיס לא קיים. נסו ${ENHARMONICS[fullRoot]}.`);
+
+            const notes = formula.intervals.map(interval => scale[(rootIndex + interval) % 12]);
             
-            const chordDisplay = document.getElementById('chord-display');
-            const chordNotesEl = document.getElementById('chord-notes');
-            const chordAliasesEl = document.getElementById('chord-aliases');
-            const chordExplanationEl = document.getElementById('chord-explanation');
-            const pianoKeys = document.querySelectorAll('#piano-visualization .key');
+            let primaryAlias = type === 'maj' ? '' : (type === 'min' ? 'm' : type);
+            const chordName = `${fullRoot}${primaryAlias}`;
 
-            const helpBtn = document.getElementById('help-btn');
-            const modalBackdrop = document.getElementById('modal-backdrop');
-            const closeModalBtn = document.getElementById('close-modal-btn');
+            const allAliases = new Set();
+            const enharmonicRoot = ENHARMONICS[fullRoot];
+            formula.aliases.forEach(alias => {
+                allAliases.add(`${fullRoot}${alias}`);
+                if (enharmonicRoot) allAliases.add(`${enharmonicRoot}${alias}`);
+            });
+            allAliases.delete(chordName);
 
-            function updateDisplay() {
-                const { root, accidental, type } = currentChord;
-                const fullRoot = root + accidental;
-                const formula = CHORD_FORMULAS[type];
+            return { name: chordName, notes, aliases: Array.from(allAliases), explanation: formula.explanation };
+        }
 
-                if (!formula) {
-                    displayError('סוג אקורד לא ידוע.');
-                    return;
-                }
-                
-                const rootIndexSharp = NOTES.sharp.indexOf(fullRoot);
-                const rootIndexFlat = NOTES.flat.indexOf(fullRoot);
-                
-                if (rootIndexSharp === -1 && rootIndexFlat === -1) {
-                    displayError('תו בסיס לא תקין.');
-                    return;
-                }
+        function parseChordName(input) {
+            if (!input) return null;
+            const sanitized = input.trim().replace('Δ','maj7').replace('°','dim').replace('ø','m7b5').replace('-','m');
+            const match = sanitized.match(/^([A-G])([#b]?)(.*)$/i);
+            if (!match) return null;
 
-                // Determine whether to use sharps or flats for calculation
-                let useSharp;
-                if (accidental === 'b') {
-                    useSharp = false;
-                } else if (accidental === '#') {
-                    useSharp = true;
-                } else { 
-                    // For natural notes, prefer sharps unless it's F or C (common flat keys)
-                    // This is a heuristic for cleaner display.
-                    useSharp = !['F', 'C'].includes(root);
-                }
+            let [, root, accidental, type] = match;
+            root = root.toUpperCase();
+            type = type.toLowerCase();
+            if (type === '' || type === 'maj') type = 'maj';
+            if (type === 'm') type = 'min';
+            if (type === 'sus') type = 'sus4';
+            if (type === '+') type = 'aug';
 
-                const rootIndex = useSharp ? rootIndexSharp : rootIndexFlat;
-                const scale = useSharp ? NOTES.sharp : NOTES.flat;
-                
-                if (rootIndex === -1) { 
-                     displayError('תו בסיס לא קיים (אנהרמוני).');
-                     return;
-                }
-                
-                const notes = formula.intervals.map(interval => scale[(rootIndex + interval) % 12]);
-                
-                // Determine primary display name
-                let primaryAlias = type;
-                if(type === 'maj') primaryAlias = '';
-                if(type === 'min') primaryAlias = 'm';
-                const chordName = `${fullRoot}${primaryAlias}`;
-                
-                chordDisplay.innerHTML = `<span dir="ltr">${chordName}</span>`;
-                chordNotesEl.textContent = notes.join(' - ');
-                chordExplanationEl.textContent = formula.explanation;
+            if (!CHORD_FORMULAS[type]) return null;
+            return { root, accidental, type };
+        }
 
-                // --- Alias Generation ---
-                let allAliases = [];
-                const enharmonicRoot = ENHARMONICS[fullRoot];
-
-                // 1. Generate aliases for the original root
-                if (formula.aliases) {
-                    allAliases = allAliases.concat(formula.aliases.map(alias => `${fullRoot}${alias}`));
-                }
-
-                // 2. Generate aliases for the enharmonic root
-                if (enharmonicRoot) {
-                    if (formula.aliases) {
-                        allAliases = allAliases.concat(formula.aliases.map(alias => `${enharmonicRoot}${alias}`));
-                    }
-                }
-
-                // 3. Filter out the primary display name and remove duplicates
-                const finalAliases = [...new Set(allAliases)].filter(a => a !== chordName);
-
-                if (finalAliases.length > 0) {
-                    chordAliasesEl.textContent = finalAliases.join(' , ');
-                } else {
-                    chordAliasesEl.textContent = 'אין';
-                }
-
-                updateActiveButtons();
-                highlightPianoKeys(notes);
+        function getNoteName(note) {
+            if (noteNaming === 'letters') return note;
+            
+            const root = note.charAt(0);
+            const solfegeRoot = SOLFEGE_MAP[root] || root;
+            
+            if (note.includes('#')) {
+                return `${solfegeRoot} דיאז`;
+            } else if (note.includes('b')) {
+                return `${solfegeRoot} במול`;
             }
             
-            function displayError(message) {
-                chordDisplay.textContent = 'שגיאה';
-                chordNotesEl.textContent = message;
-                chordAliasesEl.textContent = '...';
-                chordExplanationEl.textContent = 'נא לבחור אקורד תקין.';
-                clearPianoHighlight();
-            }
+            return solfegeRoot;
+        }
 
-            function updateActiveButtons() {
-                document.querySelectorAll('#input-area button').forEach(btn => {
-                    btn.classList.remove('btn-active');
-                    if( (btn.dataset.note && btn.dataset.note === currentChord.root) ||
-                        (btn.dataset.accidental && btn.dataset.accidental === currentChord.accidental) ||
-                        (btn.dataset.type && btn.dataset.type === currentChord.type) ) {
-                        btn.classList.add('btn-active');
-                    }
+        // --- UI UPDATE ---
+        function updateDisplay() {
+            try {
+                const info = calculateChordInfo(currentChord);
+                renderSuccess(info);
+            } catch (e) {
+                renderError(e.message);
+            }
+            updateActiveButtons();
+        }
+
+        function renderSuccess(info) {
+            const notesToHighlight = [...info.notes]; // Create a mutable copy
+
+            let whiteKeyIndex = 0;
+            const pianoKeysHTML = PIANO_KEYS.map(key => {
+                const noteIndex = notesToHighlight.findIndex(note => {
+                    const enharmonic = ENHARMONICS[note] || null;
+                    return key.name === note || key.name === enharmonic;
                 });
-            }
 
-            function parseChordName(inputString) {
-                if (!inputString) return null;
-                
-                // Handle special characters for aliases
-                const sanitizedString = inputString.trim()
-                    .replace('Δ', 'maj7')
-                    .replace('°', 'dim')
-                    .replace('ø', 'm7b5')
-                    .replace('-', 'm');
-
-                const match = sanitizedString.match(/^([A-G])([#b]?)(.*)$/i);
-                
-                if (!match) return null;
-
-                let [, root, accidental, type] = match;
-                root = root.toUpperCase();
-                
-                // Normalize type from aliases
-                type = type.toLowerCase();
-                if (type === '' || type === 'm' || type === 'maj') {
-                    type = (type === 'm') ? 'min' : 'maj';
+                let highlightClass = '';
+                if (noteIndex > -1) {
+                    highlightClass = 'highlight';
+                    notesToHighlight.splice(noteIndex, 1); // Consume the note
                 }
-                if (type === 'sus') type = 'sus4';
-                if (type === '+') type = 'aug';
 
-
-                if (!CHORD_FORMULAS[type]) {
-                    return null; // Return null if type is still not found
+                const keyTypeClass = `${key.type}-key`;
+                let style = '';
+                if (key.type === 'white') {
+                    style = `left: ${whiteKeyIndex * (100 / 7)}%;`;
+                    whiteKeyIndex++;
+                } else { // black key
+                    style = `left: ${whiteKeyIndex * (100 / 7)}%;`;
                 }
-                
-                return { root, accidental, type };
-            }
 
-            function highlightPianoKeys(notesToHighlight) {
-                clearPianoHighlight();
-                const pianoNotes = notesToHighlight.map(note => {
-                    return ENHARMONICS[note] ? NOTES.sharp[NOTES.flat.indexOf(note)] : note;
-                });
-                pianoKeys.forEach(key => {
-                    if (pianoNotes.includes(key.dataset.note)) {
-                        key.classList.add('highlight');
-                    }
-                });
-            }
+                return `<div class="key ${keyTypeClass} ${highlightClass}" style="${style}">
+                            ${getNoteName(key.name)}
+                        </div>`;
+            }).join('');
 
-            function clearPianoHighlight() {
-                pianoKeys.forEach(key => {
-                    key.classList.remove('highlight');
-                });
-            }
-
-            rootSelector.addEventListener('click', (e) => {
-                if (e.target.tagName === 'BUTTON') {
-                    currentChord.root = e.target.dataset.note;
-                    updateDisplay();
-                }
-            });
-
-            accidentalSelector.addEventListener('click', (e) => {
-                if (e.target.tagName === 'BUTTON') {
-                    currentChord.accidental = e.target.dataset.accidental;
-                    updateDisplay();
-                }
-            });
-
-            typeSelector.addEventListener('click', (e) => {
-                if (e.target.tagName === 'BUTTON') {
-                    currentChord.type = e.target.dataset.type;
-                    updateDisplay();
-                }
-            });
-
-            manualSubmit.addEventListener('click', () => {
-                const parsed = parseChordName(manualInput.value);
-                if (parsed) {
-                    currentChord = parsed;
-                    updateDisplay();
-                } else {
-                    displayError(`לא זוהה האקורד "${manualInput.value}"`);
-                }
-            });
+            const pianoHTML = `<div id="piano-visualization" dir="ltr" class="${noteNaming === 'solfege' ? 'solfege-mode' : ''}">${pianoKeysHTML}</div>`;
             
-            manualInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    manualSubmit.click();
+            outputArea.innerHTML = `
+                <h2>תוצאה</h2>
+                <div id="chord-display-wrapper">
+                    <span id="chord-display" dir="ltr">${info.name}</span>
+                </div>
+                <div>
+                    <h3 class="output-box-title"><span>🎵</span> מרכיבי האקורד</h3>
+                    <div id="chord-notes" class="output-box-content" dir="ltr">${info.notes.map(getNoteName).join(' - ')}</div>
+                </div>
+                <div>
+                    <h3 class="output-box-title"><span>🔄</span> שמות וסימונים נוספים</h3>
+                    <div id="chord-aliases" class="output-box-content" dir="ltr">${info.aliases.length > 0 ? info.aliases.join(' , ') : 'אין'}</div>
+                </div>
+                <div>
+                    <h3 class="output-box-title"><span>📖</span> הסבר על מבנה האקורד</h3>
+                    <div id="chord-explanation" class="output-box-content">${info.explanation}</div>
+                </div>
+                <div>
+                    <h3 class="output-box-title"><span>🎹</span> הצגה חזותית על פסנתר</h3>
+                    ${pianoHTML}
+                </div>
+            `;
+        }
+
+        function renderError(message) {
+             outputArea.innerHTML = `
+                <h2>תוצאה</h2>
+                <div class="error-display">
+                    <div class="emoji">☹️</div>
+                    <p class="title">שגיאה</p>
+                    <p class="message">${message}</p>
+                </div>
+            `;
+        }
+
+        function updateActiveButtons() {
+            document.querySelectorAll('.btn-group button').forEach(btn => {
+                btn.classList.remove('btn-active');
+                if ((btn.dataset.note && btn.dataset.note === currentChord.root) ||
+                    (btn.dataset.accidental === currentChord.accidental) ||
+                    (btn.dataset.type && btn.dataset.type === currentChord.type)) {
+                    btn.classList.add('btn-active');
                 }
             });
-
-            function showModal() {
-                modalBackdrop.classList.add('visible');
+        }
+        
+        // --- EVENT LISTENERS ---
+        rootSelector.addEventListener('click', (e) => {
+            if (e.target.dataset.note) {
+                currentChord.root = e.target.dataset.note;
+                updateDisplay();
             }
-
-            function hideModal() {
-                modalBackdrop.classList.remove('visible');
+        });
+        accidentalSelector.addEventListener('click', (e) => {
+            if (e.target.dataset.accidental !== undefined) {
+                currentChord.accidental = e.target.dataset.accidental;
+                updateDisplay();
             }
+        });
+        typeSelector.addEventListener('click', (e) => {
+            if (e.target.dataset.type) {
+                currentChord.type = e.target.dataset.type;
+                updateDisplay();
+            }
+        });
 
-            helpBtn.addEventListener('click', showModal);
-            closeModalBtn.addEventListener('click', hideModal);
-            modalBackdrop.addEventListener('click', (e) => {
-                if (e.target === modalBackdrop) {
-                    hideModal();
-                }
-            });
+        const handleManualSubmit = () => {
+            const parsed = parseChordName(manualInput.value);
+            if (parsed) {
+                currentChord = parsed;
+                updateDisplay();
+            } else {
+                renderError(`לא זוהה האקורד "${manualInput.value}"`);
+            }
+        };
+        manualSubmit.addEventListener('click', handleManualSubmit);
+        manualInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleManualSubmit(); });
 
-            // Initial display update
+        noteNamingToggle.addEventListener('click', () => {
+            noteNaming = noteNaming === 'letters' ? 'solfege' : 'letters';
+            noteNamingToggle.textContent = noteNaming === 'letters' ? 'דו רה מי' : 'A B C';
             updateDisplay();
         });
+
+        helpBtn.addEventListener('click', () => modalBackdrop.classList.add('visible'));
+        closeModalBtn.addEventListener('click', () => modalBackdrop.classList.remove('visible'));
+        modalBackdrop.addEventListener('click', (e) => {
+            if (e.target === modalBackdrop) modalBackdrop.classList.remove('visible');
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') modalBackdrop.classList.remove('visible');
+        });
+
+        // --- INITIALIZATION ---
+        updateDisplay();
+    });
     </script>
 </body>
 </html>
-
+```
