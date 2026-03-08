@@ -1,533 +1,562 @@
-
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>מילון אקורדים דיגיטלי | למד כל אקורד בקלות</title>
-
-    <!-- Primary SEO Meta Tags -->
-    <meta name="description" content="מילון אקורדים דיגיטלי אינטראקטיבי ללימוד תיאוריה מוזיקלית. מצא כל אקורד, ראה את התווים המרכיבים אותו, ולמד כיצד לנגן אותו על פסנתר." />
-    <meta name="keywords" content="אקורדים, מילון אקורדים, תיאוריה מוזיקלית, לימוד נגינה, פסנתר, גיטרה, תווים, אקורד מז'ור, אקורד מינור" />
-    <meta name="author" content="Gemini" />
-    <meta name="robots" content="index, follow" />
-
-    <!-- Google Site Verification -->
-    <meta name="google-site-verification" content="8RDNgkyI2spVbAeHNSXP6lpThfS8Xb0E3z7HhBmc8fo" />
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="מילון אקורדים דיגיטלי | למד כל אקורד בקלות" />
-    <meta property="og:description" content="גלה, למד והצג כל אקורד על פסנתר וירטואלי. כלי אינטראקטיבי חיוני למוזיקאים." />
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary" />
-    <meta property="twitter:title" content="מילון אקורדים דיגיטלי | למד כל אקורד בקלות" />
-    <meta property="twitter:description" content="גלה, למד והצג כל אקורד על פסנתר וירטואלי. כלי אינטראקטיבי חיוני למוזיקאים." />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --blue-50: #eff6ff; --blue-500: #3b82f6; --blue-600: #2563eb; --blue-700: #1d4ed8;
-            --gray-100: #f3f4f6; --gray-200: #e5e7eb; --gray-300: #d1d5db; --gray-500: #6b7280;
-            --gray-700: #374151; --gray-800: #1f2937; --white: #ffffff; --black: #000000;
-            --red-600: #dc2626;
-        }
-        body {
-            font-family: 'Assistant', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f0f2f5;
-            color: var(--gray-800);
-            margin: 0;
-            padding: 1rem;
-        }
-        * { box-sizing: border-box; }
-        .container { max-width: 56rem; margin: 0 auto; }
-        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-        h1 { font-size: 2.25rem; font-weight: 700; color: var(--gray-800); }
-        main { display: grid; gap: 2rem; }
-        @media (min-width: 1024px) { main { grid-template-columns: 1fr 1fr; } }
-
-        /* --- Cards --- */
-        .card {
-            background-color: var(--white);
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        .card h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--gray-700);
-            border-bottom: 2px solid var(--gray-100);
-            padding-bottom: 0.5rem;
-            margin: -1.5rem -1.5rem 0;
-            padding: 0 1.5rem 0.5rem;
-        }
-        .card h3 { font-weight: 600; font-size: 1.125rem; margin-bottom: 0.75rem; }
-
-        /* --- Buttons --- */
-        .btn {
-            padding: 0.65rem 0.75rem;
-            border-radius: 0.375rem;
-            border: none;
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
-        }
-        .btn:focus { outline: 2px solid var(--blue-500); outline-offset: 2px; }
-
-        .btn-group button {
-            background-color: var(--gray-200);
-            color: var(--gray-800);
-        }
-        .btn-group button:hover { background-color: var(--gray-300); }
-        .btn-group button.btn-active {
-            background-color: var(--blue-600);
-            color: var(--white);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
-        }
-
-        #header-controls { display: flex; align-items: center; gap: 0.5rem; }
-        #note-naming-toggle, #help-btn {
-            width: 2.5rem; height: 2.5rem;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 600;
-            background-color: var(--white);
-            color: var(--blue-600);
-            border-radius: 9999px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
-            transition: transform 0.2s, background-color 0.2s;
-        }
-        #note-naming-toggle { font-size: 0.75rem; width: auto; padding: 0 0.75rem; }
-        #help-btn { font-size: 1.5rem; }
-        #note-naming-toggle:hover, #help-btn:hover { transform: scale(1.1); background-color: var(--gray-100); }
-        
-        /* --- Input --- */
-        .button-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
-        .button-grid-auto { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 0.5rem; }
-        .flex-group { display: flex; gap: 0.75rem; }
-
-        #manual-input {
-            flex-grow: 1; padding: 0.65rem; border: 2px solid var(--gray-300); border-radius: 0.375rem;
-            transition: border-color 0.2s; font-size: 1rem;
-        }
-        #manual-input:focus { outline: none; border-color: var(--blue-500); }
-        #manual-submit { background-color: var(--blue-500); color: var(--white); }
-        #manual-submit:hover { background-color: var(--blue-600); }
-
-        /* --- Output --- */
-        #chord-display-wrapper { text-align: center; background-color: var(--blue-50); padding: 1rem; border-radius: 0.5rem; }
-        #chord-display { font-size: 2.5rem; font-weight: 700; color: var(--blue-700); letter-spacing: 0.05em; }
-        .output-box-title { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
-        .output-box-title span { font-size: 1.25rem; }
-        .output-box-content {
-            background-color: var(--gray-100); padding: 1rem; border-radius: 0.375rem; min-height: 3rem;
-            display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.6;
-        }
-        #chord-notes { font-size: 1.5rem; font-weight: 700; letter-spacing: 0.1em; }
-        #chord-aliases { font-size: 1.125rem; color: var(--gray-700); }
-        #chord-explanation { text-align: right; }
-        .error-display { text-align: center; }
-        .error-display .emoji { font-size: 3rem; margin-bottom: 1rem; }
-        .error-display .title { font-size: 1.5rem; font-weight: 700; color: var(--red-600); }
-        .error-display .message { color: var(--gray-700); margin-top: 0.5rem; }
-
-        /* --- Piano --- */
-        #piano-visualization {
-            position: relative; width: 100%; height: 10rem; background-color: var(--gray-800);
-            border-radius: 0.5rem; box-shadow: inset 0 0 10px rgba(0,0,0,0.5); padding: 0.5rem; user-select: none;
-        }
-        .key {
-            position: absolute; border-radius: 0 0 5px 5px; border: 1px solid var(--gray-500);
-            display: flex; justify-content: center; align-items: flex-end; padding-bottom: 0.25rem;
-            font-size: 0.75rem; transition: background-color 0.1s ease-out;
-        }
-        .white-key {
-            width: calc(100% / 7); height: 100%; top: 0; background-color: var(--white); color: var(--black); z-index: 1;
-        }
-        .black-key {
-            width: calc(100% / 14); height: 60%; top: 0; background-color: var(--black); color: var(--white); z-index: 2;
-            transform: translateX(-50%);
-        }
-        .key.highlight { background-color: var(--blue-500); border-color: var(--blue-700); }
-        .white-key.highlight { color: var(--white); }
-
-        #piano-visualization.solfege-mode .key {
-            font-size: 0.6rem;
-            padding-bottom: 0.4rem; 
-        }
-
-        /* --- Modal --- */
-        #modal-backdrop {
-            position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.5);
-            display: flex; align-items: center; justify-content: center; z-index: 100;
-            opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0s 0.3s;
-        }
-        #modal-backdrop.visible { opacity: 1; visibility: visible; transition-delay: 0s; }
-        #help-modal {
-            max-width: 500px; width: 90%; transform: scale(0.95); transition: transform 0.3s ease;
-        }
-        #modal-backdrop.visible #help-modal { transform: scale(1); }
-        #help-modal ul { list-style-position: inside; padding-right: 0.5rem; }
-        #help-modal p, #help-modal ul { color: var(--gray-700); margin-bottom: 1rem; }
-        #close-modal-btn { width: 100%; margin-top: 1rem; background-color: var(--blue-500); color: var(--white); }
-        #close-modal-btn:hover { background-color: var(--blue-600); }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chord Lab — מילון אקורדים</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07090f;--card:rgba(12,15,25,0.98);
+  --border:rgba(255,255,255,0.07);--border-hi:rgba(255,255,255,0.13);
+  --gold:#c9a84c;--gold-hi:#e8c870;--gold-dim:rgba(201,168,76,0.25);--gold-glow:rgba(201,168,76,0.08);
+  --cream:#e0dbd0;--muted:#5e6275;--err:#e06060;
+  --r:14px;--rs:8px;
+  --shadow:0 24px 60px rgba(0,0,0,0.7),0 4px 16px rgba(0,0,0,0.4);
+  --fd:'Cormorant Garamond',serif;--fb:'Nunito',sans-serif;--fm:'JetBrains Mono',monospace;
+}
+body{font-family:var(--fb);background:var(--bg);color:var(--cream);min-height:100vh;padding:1.5rem 1rem 4rem;overflow-x:hidden;position:relative;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 55% 40% at 15% 8%,rgba(201,168,76,0.055) 0%,transparent 60%),radial-gradient(ellipse 45% 35% at 85% 92%,rgba(60,80,180,0.04) 0%,transparent 60%);}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(201,168,76,0.016) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.016) 1px,transparent 1px);background-size:44px 44px;}
+.app{position:relative;z-index:1;max-width:1000px;margin:0 auto}
+header{display:flex;justify-content:space-between;align-items:center;padding-bottom:1.5rem;margin-bottom:2rem;border-bottom:1px solid var(--border);}
+.logo{display:flex;align-items:center;gap:.875rem}
+.logo-icon{width:44px;height:44px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,rgba(201,168,76,.18),rgba(201,168,76,.04));border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:1.4rem;box-shadow:0 0 22px rgba(201,168,76,.1);}
+.logo h1{font-family:var(--fd);font-size:1.9rem;font-weight:600;line-height:1;background:linear-gradient(135deg,#f0eade 20%,var(--gold) 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.logo p{font-size:.68rem;color:var(--muted);letter-spacing:.08em;margin-top:1px}
+.hdr-actions{display:flex;gap:.4rem}
+.pill-btn{display:flex;align-items:center;justify-content:center;height:36px;padding:0 .875rem;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:9999px;color:var(--gold);font-size:.72rem;font-weight:700;font-family:var(--fb);letter-spacing:.04em;cursor:pointer;transition:all .2s;}
+.pill-btn:hover{background:var(--gold-glow);border-color:var(--gold-dim);transform:translateY(-1px)}
+main{display:grid;gap:1.25rem}
+@media(min-width:780px){main{grid-template-columns:1fr 1fr}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.card-hdr{padding:.875rem 1.375rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.5rem;}
+.card-hdr .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.card-hdr h2{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.13em;color:var(--muted)}
+.card-body{padding:1.375rem;display:flex;flex-direction:column;gap:1.25rem}
+.sec-lbl{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.45rem}
+.btn-row{display:flex;flex-wrap:wrap;gap:.28rem}
+.sel-btn{padding:.42rem .65rem;min-width:36px;border-radius:var(--rs);border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--cream);font-size:.82rem;font-weight:600;font-family:var(--fb);cursor:pointer;transition:all .15s;text-align:center;white-space:nowrap;}
+.sel-btn:hover{background:rgba(255,255,255,.07);border-color:var(--border-hi);transform:translateY(-1px)}
+.sel-btn.on{background:var(--gold);border-color:var(--gold);color:#140e00;box-shadow:0 4px 16px rgba(201,168,76,.32);transform:translateY(-1px);}
+.sel-btn.type-btn{font-size:.76rem;min-width:54px}
+.input-row{display:flex;gap:.5rem}
+.txt-input{flex:1;padding:.55rem .875rem;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:var(--rs);color:var(--cream);font-size:.875rem;font-family:var(--fm);outline:none;transition:border-color .2s,background .2s;direction:ltr;}
+.txt-input::placeholder{color:var(--muted)}
+.txt-input:focus{border-color:var(--gold-dim);background:rgba(255,255,255,.06)}
+.go-btn{padding:.55rem 1.2rem;background:var(--gold);border:none;border-radius:var(--rs);color:#140e00;font-weight:800;font-family:var(--fb);font-size:.85rem;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.go-btn:hover{background:var(--gold-hi);transform:translateY(-1px);box-shadow:0 4px 18px rgba(201,168,76,.38)}
+hr.div{border:none;height:1px;background:var(--border)}
+.chord-hero{text-align:center;padding:1.5rem 1rem .875rem;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,.07) 0%,transparent 70%);border-bottom:1px solid var(--border);}
+.chord-name{font-family:var(--fd);font-size:4rem;font-weight:700;line-height:1;letter-spacing:.03em;background:linear-gradient(145deg,#f5edcc 0%,var(--gold) 55%,#b07828 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+@keyframes pop{from{opacity:0;transform:scale(.88) translateY(4px)}to{opacity:1;transform:none}}
+.chord-name.pop{animation:pop .22s ease}
+.chord-type-lbl{font-size:.78rem;color:var(--muted);margin-top:.2rem;letter-spacing:.04em}
+.notes-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.3rem;padding:.6rem .875rem;margin:0 1.375rem;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.12);border-radius:var(--rs);}
+.note-chip{font-family:var(--fm);font-size:.9rem;font-weight:500;color:var(--cream);padding:.08rem .4rem;background:rgba(255,255,255,.07);border-radius:4px;letter-spacing:.03em}
+.note-sep{color:var(--muted);font-size:.7rem;margin:0 .05rem}
+.info-sections{display:flex;flex-direction:column;gap:.875rem;padding:0 1.375rem 1.375rem}
+.info-block{display:flex;flex-direction:column;gap:.2rem}
+.info-lbl{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.info-val{font-family:var(--fm);font-size:.78rem;color:#a09b90;letter-spacing:.02em;line-height:1.55}
+.info-explain{font-family:var(--fb);font-size:.83rem;color:#9a9590;line-height:1.7;direction:rtl}
+.inst-tabs{display:flex;gap:.28rem;background:rgba(0,0,0,.4);padding:.22rem;border-radius:var(--rs);margin-bottom:.875rem;}
+.tab-btn{flex:1;padding:.42rem;border:1px solid transparent;border-radius:6px;background:transparent;color:var(--muted);font-size:.76rem;font-weight:700;font-family:var(--fb);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:.3rem;}
+.tab-btn:hover:not(.on){color:var(--cream);background:rgba(255,255,255,.05)}
+.tab-btn.on{background:rgba(201,168,76,.14);color:var(--gold);border-color:rgba(201,168,76,.28)}
+.piano-wrap{position:relative;width:100%;height:112px;background:#0c0e14;border-radius:var(--rs);border:1px solid rgba(255,255,255,.06);overflow:hidden;}
+.pk{position:absolute;top:0;border-radius:0 0 5px 5px;transition:background .12s,box-shadow .12s;cursor:default}
+.pk.w{background:#cec8ba;z-index:1;border-left:1px solid rgba(0,0,0,.18)}
+.pk.b{background:#141420;z-index:2;border:1px solid #000;border-bottom:3px solid #000}
+.pk.w.hl{background:var(--gold);box-shadow:0 0 12px rgba(201,168,76,.5)}
+.pk.b.hl{background:#8c6016;box-shadow:0 0 12px rgba(201,168,76,.5)}
+.pk-lbl{position:absolute;bottom:5px;left:50%;transform:translateX(-50%);font-family:var(--fm);font-size:.46rem;color:rgba(0,0,0,.35);white-space:nowrap;pointer-events:none;}
+.pk.hl .pk-lbl{color:rgba(0,0,0,.7);font-weight:600}
+.pk.b .pk-lbl{color:rgba(255,255,255,.28)}
+.pk.b.hl .pk-lbl{color:rgba(0,0,0,.55)}
+.guitar-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:1.25rem}
+.gdiag{display:flex;flex-direction:column;align-items:center}
+.gdiag-lbl{font-family:var(--fm);font-size:.66rem;color:var(--muted);margin-top:.375rem;letter-spacing:.04em;text-align:center}
+.guitar-none{padding:2rem 1rem;text-align:center;color:var(--muted);font-size:.85rem}
+.err-state{text-align:center;padding:3rem 1rem}
+.err-icon{font-size:2.5rem;margin-bottom:.75rem;opacity:.55}
+.err-title{font-size:1.1rem;font-weight:700;color:var(--err)}
+.err-msg{color:var(--muted);font-size:.83rem;margin-top:.35rem}
+.mbg{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .25s,visibility 0s .25s;}
+.mbg.show{opacity:1;visibility:visible;transition-delay:0s}
+.modal{max-width:460px;width:90%;max-height:85vh;overflow-y:auto;transform:translateY(18px) scale(.97);transition:transform .25s;}
+.mbg.show .modal{transform:none}
+.modal .card-body p,.modal .card-body ul{color:#9a96a0;font-size:.875rem;line-height:1.7}
+.modal .card-body ul{padding-right:1.25rem}
+.modal .card-body li{margin-bottom:.35rem}
+.modal .card-body strong{color:var(--cream)}
+.modal-ft{padding:.875rem 1.375rem 1.375rem;border-top:1px solid var(--border);text-align:center}
+.close-btn{width:100%;padding:.7rem;background:var(--gold);border:none;border-radius:var(--rs);color:#140e00;font-weight:800;font-family:var(--fb);font-size:.875rem;cursor:pointer;transition:background .15s;}
+.close-btn:hover{background:var(--gold-hi)}
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>מילון אקורדים דיגיטלי</h1>
-            <div id="header-controls">
-                <button id="note-naming-toggle" class="btn" title="החלף שיטת סימון תווים">דו רה מי</button>
-                <button id="help-btn" class="btn">?</button>
-            </div>
-        </header>
-
-        <main>
-            <!-- Input Area -->
-            <div class="card">
-                <h2>בחירת אקורד</h2>
-                <div>
-                    <h3>1. תו בסיס (Root)</h3>
-                    <div id="root-note-selector" class="button-grid-4 btn-group">
-                        <button data-note="C" class="btn">C</button> <button data-note="D" class="btn">D</button>
-                        <button data-note="E" class="btn">E</button> <button data-note="F" class="btn">F</button>
-                        <button data-note="G" class="btn">G</button> <button data-note="A" class="btn">A</button>
-                        <button data-note="B" class="btn">B</button>
-                    </div>
-                </div>
-                <div>
-                    <h3>2. סימני היתק (Accidentals)</h3>
-                    <div id="accidental-selector" class="flex-group btn-group">
-                        <button data-accidental="" class="btn">רגיל</button>
-                        <button data-accidental="b" class="btn">♭ (במול)</button>
-                        <button data-accidental="#" class="btn">♯ (דיאז)</button>
-                    </div>
-                </div>
-                <div>
-                    <h3>3. סוג האקורד (Type)</h3>
-                    <div id="type-selector" class="button-grid-auto btn-group">
-                        <button data-type="maj" class="btn">מז'ור</button> <button data-type="min" class="btn">מינור</button>
-                        <button data-type="dim" class="btn">מוקטן (dim)</button> <button data-type="aug" class="btn">מוגדל (aug)</button>
-                        <button data-type="7" class="btn">7</button> <button data-type="maj7" class="btn">Maj7</button>
-                        <button data-type="min7" class="btn">m7</button> <button data-type="sus2" class="btn">sus2</button>
-                        <button data-type="sus4" class="btn">sus4</button> <button data-type="6" class="btn">6</button>
-                        <button data-type="m6" class="btn">m6</button> <button data-type="dim7" class="btn">dim7</button>
-                        <button data-type="m7b5" class="btn">m7b5</button>
-                    </div>
-                </div>
-                <div style="border-top: 2px solid var(--gray-100); padding-top: 1.5rem;">
-                    <h3>או: הקלדה ידנית</h3>
-                    <div class="flex-group">
-                        <input type="text" id="manual-input" placeholder="לדוגמה: C#m7 או Gb">
-                        <button id="manual-submit" class="btn">הצג</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Output Area -->
-            <div id="output-area" class="card">
-                <h2>תוצאה</h2>
-                <!-- Content is generated by JavaScript -->
-            </div>
-        </main>
+<div id="top-banner" style="background:linear-gradient(90deg,rgba(201,168,76,0.13),rgba(201,168,76,0.07));border-bottom:1px solid var(--gold-dim);padding:.55rem 1rem;display:flex;align-items:center;justify-content:center;gap:.75rem;position:relative;font-size:.8rem;color:var(--cream);">
+  <span style="opacity:.7">🚧</span>
+  <span>הכלי בהרצה — לתגובות והערות:
+    <a href="https://forms.gle/vwFg8aJBqyJp3Gft9" target="_blank" rel="noopener"
+       style="color:var(--gold);font-weight:700;text-decoration:underline;text-underline-offset:2px;margin-right:.25rem">
+      https://forms.gle/vwFg8aJBqyJp3Gft9
+    </a>
+  </span>
+  <button onclick="document.getElementById('top-banner').style.display='none'"
+    style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);
+           background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:50%;
+           width:24px;height:24px;color:var(--muted);font-size:.9rem;cursor:pointer;
+           display:flex;align-items:center;justify-content:center;transition:all .2s;line-height:1;"
+    title="סגור">×</button>
+</div>
+<div class="app">
+  <header>
+    <div class="logo">
+      <div class="logo-icon">♩</div>
+      <div><h1>Chord Lab</h1><p>מילון אקורדים דיגיטלי</p></div>
     </div>
-
-    <!-- Help Modal -->
-    <div id="modal-backdrop">
-        <div id="help-modal" class="card">
-            <h2>אודות האפליקציה</h2>
-            <p>ברוכים הבאים לאפליקציה ללימוד אקורדים!<br>כאן תוכלו ללמוד כיצד לבנות כל אקורד נפוץ.</p>
-            <h3>איך משתמשים?</h3>
-            <p>
-                <strong>בחירה לפי רכיבים:</strong> בחרו את תו הבסיס, סימן היתק וסוג האקורד. התוצאה תתעדכן אוטומטית.<br>
-                <strong>הקלדה ידנית:</strong> כתבו את שם האקורד המלא (לדוגמה: F#m7) ולחצו "הצג".
-            </p>
-            <h3>מה רואים בתוצאה?</h3>
-            <ul class="list-disc list-inside space-y-1">
-                <li><strong>מרכיבי האקורד:</strong> התווים המדויקים שמרכיבים את האקורד.</li>
-                <li><strong>שמות נוספים:</strong> סימונים חלופיים לאקורד, כולל שמות אנהרמוניים.</li>
-                <li><strong>הסבר על המבנה:</strong> פירוט על הנוסחה, המרווחים והאופי של האקורד.</li>
-                <li><strong>הצגה חזותית על פסנתר:</strong> תצוגה גרפית של האקורד על קלידי הפסנתר.</li>
-            </ul>
-            <div style="text-align: center; font-size: 0.875rem; color: var(--gray-500); padding-top: 1rem; border-top: 1px solid var(--gray-200);">
-                <p>פותח באמצעות Gemini 🛡️</p>
-            </div>
-            <button id="close-modal-btn" class="btn">הבנתי, תודה!</button>
+    <div class="hdr-actions">
+      <button id="sol-toggle" class="pill-btn">דו רה מי</button>
+      <button id="help-btn" class="pill-btn" style="width:36px;padding:0;font-size:1.1rem">?</button>
+    </div>
+  </header>
+  <main>
+    <div class="card">
+      <div class="card-hdr"><span class="dot"></span><h2>בחירת אקורד</h2></div>
+      <div class="card-body">
+        <div>
+          <div class="sec-lbl">תו בסיס</div>
+          <div class="btn-row" id="root-sel">
+            <button class="sel-btn" data-root="C">C</button>
+            <button class="sel-btn" data-root="D">D</button>
+            <button class="sel-btn" data-root="E">E</button>
+            <button class="sel-btn" data-root="F">F</button>
+            <button class="sel-btn" data-root="G">G</button>
+            <button class="sel-btn" data-root="A">A</button>
+            <button class="sel-btn" data-root="B">B</button>
+          </div>
         </div>
+        <div>
+          <div class="sec-lbl">היתק</div>
+          <div class="btn-row" id="acc-sel">
+            <button class="sel-btn" data-acc="" style="min-width:70px">טבעי ♮</button>
+            <button class="sel-btn" data-acc="b" style="min-width:78px">♭ במול</button>
+            <button class="sel-btn" data-acc="#" style="min-width:78px">♯ דיאז</button>
+          </div>
+        </div>
+        <div>
+          <div class="sec-lbl">סוג אקורד</div>
+          <div class="btn-row" id="type-sel">
+            <button class="sel-btn type-btn" data-type="maj">Major</button>
+            <button class="sel-btn type-btn" data-type="min">Minor</button>
+            <button class="sel-btn type-btn" data-type="dim">dim</button>
+            <button class="sel-btn type-btn" data-type="aug">aug</button>
+            <button class="sel-btn type-btn" data-type="7">7</button>
+            <button class="sel-btn type-btn" data-type="maj7">Maj7</button>
+            <button class="sel-btn type-btn" data-type="min7">m7</button>
+            <button class="sel-btn type-btn" data-type="sus2">sus2</button>
+            <button class="sel-btn type-btn" data-type="sus4">sus4</button>
+            <button class="sel-btn type-btn" data-type="6">6</button>
+            <button class="sel-btn type-btn" data-type="m6">m6</button>
+            <button class="sel-btn type-btn" data-type="dim7">dim7</button>
+            <button class="sel-btn type-btn" data-type="m7b5">ø m7b5</button>
+          </div>
+        </div>
+        <hr class="div">
+        <div>
+          <div class="sec-lbl">הקלדה ידנית</div>
+          <div class="input-row">
+            <input type="text" id="manual" class="txt-input" placeholder="C#m7 , Gbmaj7 , Bsus4 ...">
+            <button id="go-btn" class="go-btn">הצג</button>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="card" id="out-card"></div>
+  </main>
+</div>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // --- DATA CONSTANTS ---
-        const NOTES = {
-            sharp: ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'],
-            flat:  ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B']
-        };
-        const CHORD_FORMULAS = {
-            maj:   { name: 'מז\'ור', intervals: [0, 4, 7], aliases: ['', 'M'], explanation: "אקורד מז'ורי, בעל צליל 'שמח' ויציב. בנוי מתו בסיס, טרצה גדולה (4 חצאי טונים) וקווינטה זכה (7 חצאי טונים)." },
-            min:   { name: 'מינור', intervals: [0, 3, 7], aliases: ['m', 'min', '-'], explanation: "אקורד מינורי, בעל צליל 'עצוב' או 'נוגה'. בנוי מתו בסיס, טרצה קטנה (3 חצאי טונים) וקווינטה זכה (7 חצאי טונים)." },
-            dim:   { name: 'מוקטן (diminished)', intervals: [0, 3, 6], aliases: ['dim', '°'], explanation: "אקורד מוקטן, בעל צליל מתוח וחסר יציבות. בנוי מתו בסיס, טרצה קטנה (3 חצאי טונים) וקווינטה מוקטנת (6 חצאי טונים)." },
-            aug:   { name: 'מוגדל (augmented)', intervals: [0, 4, 8], aliases: ['aug', '+', '+5'], explanation: "אקורד מוגדל, בעל צליל 'חולמני' או מתוח. בנוי מתו בסיס, טרצה גדולה (4 חצאי טונים) וקווינטה מוגדלת (8 חצאי טונים)." },
-            '7':     { name: 'דומיננטי (7)', intervals: [0, 4, 7, 10], aliases: ['7', 'dom7'], explanation: "אקורד דומיננטי 7, אקורד מז'ורי עם תוספת של ספטימה קטנה (10 חצאי טונים). בעל צליל עשיר ומלא מתח ש'רוצה להיפתר' לאקורד הטוניקה." },
-            maj7:  { name: 'מז\'ור 7', intervals: [0, 4, 7, 11], aliases: ['maj7', 'M7', 'Δ7'], explanation: "אקורד מז'ור 7, אקורד מז'ורי עם תוספת של ספטימה גדולה (11 חצאי טונים). בעל צליל 'רך', 'עשיר' ו'חולמני'." },
-            min7:  { name: 'מינור 7', intervals: [0, 3, 7, 10], aliases: ['m7', 'min7', '-7'], explanation: "אקורד מינור 7, אקורד מינורי עם תוספת של ספטימה קטנה (10 חצאי טונים). בעל צליל 'חלק' ו'מתוחכם'." },
-            sus2:  { name: 'sus2', intervals: [0, 2, 7], aliases: ['sus2'], explanation: "אקורד מושהה (sus) בו הטרצה מוחלפת בדרגה השנייה. יוצר צליל פתוח, אוורירי וחסר 'אופי' מז'ורי/מינורי." },
-            sus4:  { name: 'sus4', intervals: [0, 5, 7], aliases: ['sus4', 'sus'], explanation: "אקורד מושהה (sus) בו הטרצה מוחלפת בדרגה הרביעית. יוצר מתח ששואף להיפתר חזרה לאקורד המקורי." },
-            '6':     { name: 'מז\'ור 6', intervals: [0, 4, 7, 9], aliases: ['6', 'M6'], explanation: "אקורד מז'ור 6, אקורד מז'ורי עם תוספת של סקסטה גדולה (9 חצאי טונים). בעל צליל 'מתוק' ונוסטלגי." },
-            m6:    { name: 'מינור 6', intervals: [0, 3, 7, 9], aliases: ['m6', 'min6', '-6'], explanation: "אקורד מינור 6, אקורד מינורי עם תוספת של סקסטה גדולה (9 חצאי טונים). בעל צליל מורכב ומתוחכם." },
-            dim7:  { name: 'מוקטן 7', intervals: [0, 3, 6, 9], aliases: ['dim7', '°7'], explanation: "אקורד מוקטן 7, אקורד מוקטן עם תוספת של ספטימה מוקטנת (9 חצאי טונים). אקורד סימטרי ובעל מתח גבוה מאוד." },
-            m7b5:  { name: 'חצי מוקטן (m7b5)', intervals: [0, 3, 6, 10], aliases: ['m7b5', 'ø', 'ø7'], explanation: "אקורד חצי מוקטן (מינור 7 עם קווינטה מונמכת), אקורד מוקטן עם ספטימה קטנה (10 חצאי טונים). נפוץ במהלך ii-V-I בסולם מינורי." }
-        };
-        const ENHARMONICS = {
-            'C#': 'Db', 'Db': 'C#', 'D#': 'Eb', 'Eb': 'D#', 'F#': 'Gb', 'Gb': 'F#',
-            'G#': 'Ab', 'Ab': 'G#', 'A#': 'Bb', 'Bb': 'A#'
-        };
-        const SOLFEGE_MAP = {
-            'C': 'דו', 'D': 'רה', 'E': 'מי', 'F': 'פה', 'G': 'סול', 'A': 'לה', 'B': 'סי'
-        };
-        const PIANO_KEYS = [
-            { name: 'C', type: 'white' }, { name: 'C#', type: 'black' },
-            { name: 'D', type: 'white' }, { name: 'D#', type: 'black' },
-            { name: 'E', type: 'white' },
-            { name: 'F', type: 'white' }, { name: 'F#', type: 'black' },
-            { name: 'G', type: 'white' }, { name: 'G#', type: 'black' },
-            { name: 'A', type: 'white' }, { name: 'A#', type: 'black' },
-            { name: 'B', type: 'white' }
-        ];
+<div class="mbg" id="modal">
+  <div class="modal card">
+    <div class="card-hdr"><span class="dot"></span><h2>אודות Chord Lab</h2></div>
+    <div class="card-body">
+      <p>כלי מקצועי ללימוד אקורדים — בחרו אקורד וראו אותו על פסנתר וגיטרה וירטואליים.</p><br>
+      <p><strong>בחירה מהירה:</strong> לחצו על תו בסיס, היתק וסוג.<br><strong>הקלדה ידנית:</strong> <code style="font-family:JetBrains Mono,monospace;color:var(--gold)">F#m7</code>, <code style="font-family:JetBrains Mono,monospace;color:var(--gold)">Bbmaj7</code>, <code style="font-family:JetBrains Mono,monospace;color:var(--gold)">Csus4</code></p><br>
+      <p><strong>מה מוצג:</strong></p>
+      <ul>
+        <li>מרכיבי האקורד — אנגלי או סולפז'</li>
+        <li>שמות וסימונים חלופיים</li>
+        <li>הסבר על מבנה ואופי האקורד</li>
+        <li>ויזואליזציה על פסנתר וגיטרה (עם barre ואצבוע)</li>
+      </ul>
+    </div>
+    <div class="modal-ft">
+      <p style="font-size:.73rem;color:var(--muted)">Chord Lab · עוצב מחדש ✦</p>
+      <button class="close-btn" id="close-modal">הבנתי, תודה!</button>
+    </div>
+  </div>
+</div>
 
-        // --- STATE ---
-        let currentChord = { root: 'C', accidental: '', type: 'maj' };
-        let noteNaming = 'letters'; // 'letters' or 'solfege'
+<script>
+const NS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+const NF=['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];
+const ENH={'C#':'Db','Db':'C#','D#':'Eb','Eb':'D#','F#':'Gb','Gb':'F#','G#':'Ab','Ab':'G#','A#':'Bb','Bb':'A#'};
+const SOL={C:'דו',D:'רה',E:'מי',F:'פה',G:'סול',A:'לה',B:'סי'};
 
-        // --- DOM ELEMENTS ---
-        const rootSelector = document.getElementById('root-note-selector');
-        const accidentalSelector = document.getElementById('accidental-selector');
-        const typeSelector = document.getElementById('type-selector');
-        const manualInput = document.getElementById('manual-input');
-        const manualSubmit = document.getElementById('manual-submit');
-        const outputArea = document.getElementById('output-area');
-        const noteNamingToggle = document.getElementById('note-naming-toggle');
-        const helpBtn = document.getElementById('help-btn');
-        const modalBackdrop = document.getElementById('modal-backdrop');
-        const closeModalBtn = document.getElementById('close-modal-btn');
+const FORMULAS={
+  maj:{name:"מז'ור",intervals:[0,4,7],aliases:['','M'],explain:"אקורד מז'ורי — אופי שמח, יציב ובהיר. טרצה גדולה (4 חצ\"ט) + קווינטה זכה (7 חצ\"ט). האקורד הבסיסי ביותר."},
+  min:{name:'מינור',intervals:[0,3,7],aliases:['m','min','-'],explain:"אקורד מינורי — אופי נוגה ומלנכולי. טרצה קטנה (3 חצ\"ט) + קווינטה זכה (7 חצ\"ט). שונה ממז'ור רק בטרצה."},
+  dim:{name:'מוקטן (dim)',intervals:[0,3,6],aliases:['dim','°'],explain:"אקורד מוקטן — מתוח, דרמטי, לא יציב. טרצה קטנה (3) + קווינטה מוקטנת (6 חצ\"ט). מעבר מצוין בדרגה VII."},
+  aug:{name:'מוגדל (aug)',intervals:[0,4,8],aliases:['aug','+'],explain:"אקורד מוגדל — מסתורי וחולמני. טרצה גדולה (4) + קווינטה מוגדלת (8 חצ\"ט). סימטרי לחלוטין."},
+  '7':{name:'דומיננטי 7',intervals:[0,4,7,10],aliases:['7','dom7'],explain:"מז'ור עם ספטימה קטנה (10 חצ\"ט). מתח דרמטי הרוצה להיפתר לטוניקה. בסיס הבלוז והג'אז."},
+  maj7:{name:"מז'ור 7",intervals:[0,4,7,11],aliases:['maj7','M7','Δ7'],explain:"מז'ור עם ספטימה גדולה (11 חצ\"ט). צליל רך, עשיר וחולמני. אקורד הג'אז הקלאסי."},
+  min7:{name:'מינור 7',intervals:[0,3,7,10],aliases:['m7','min7','-7'],explain:"מינור עם ספטימה קטנה (10 חצ\"ט). חלק ומתוחכם. נפוץ מאוד בג'אז ובסול."},
+  sus2:{name:'מושהה 2 (sus2)',intervals:[0,2,7],aliases:['sus2'],explain:"הטרצה מוחלפת בדרגה 2 (2 חצ\"ט). פתוח ואוורירי, ללא מגדר מז'ור/מינור. נפוץ בפופ מודרני."},
+  sus4:{name:'מושהה 4 (sus4)',intervals:[0,5,7],aliases:['sus4','sus'],explain:"הטרצה מוחלפת בדרגה 4 (5 חצ\"ט). מתח השואף להיפתר. נפוץ לפני קאדנס."},
+  '6':{name:"מז'ור 6",intervals:[0,4,7,9],aliases:['6','M6'],explain:"מז'ור עם סקסטה גדולה (9 חצ\"ט). מתוק ונוסטלגי. נפוץ בג'אז ופופ ישן."},
+  m6:{name:'מינור 6',intervals:[0,3,7,9],aliases:['m6','min6'],explain:"מינור עם סקסטה גדולה (9 חצ\"ט). מורכב ומרגש. נפוץ בג'אז מינורי ובמוזיקה לטינית."},
+  dim7:{name:'מוקטן 7 (dim7)',intervals:[0,3,6,9],aliases:['dim7','°7'],explain:"מוקטן עם ספטימה מוקטנת (9 חצ\"ט). סימטרי לחלוטין — חוזר כל 3 חצ\"ט. מתח מקסימלי."},
+  m7b5:{name:'חצי מוקטן (ø)',intervals:[0,3,6,10],aliases:['m7b5','ø','ø7'],explain:"מינור 7 עם קווינטה מוקטנת (6 חצ\"ט). הדרגה ii° במהלך ii–V–i בטונאליות מינורית."}
+};
 
-        // --- CORE LOGIC ---
-        function calculateChordInfo(chord) {
-            const { root, accidental, type } = chord;
-            const fullRoot = root + accidental;
-            const formula = CHORD_FORMULAS[type];
-            if (!formula) throw new Error('סוג אקורד לא ידוע.');
+// Guitar chord voicings: [s0=lowE, s1=A, s2=D, s3=G, s4=B, s5=highE]
+// frets: 0=open, -1=muted, N=absolute fret
+// fingers: 0=none/open, 1-4=finger
+// barre: {fret, from (string index), to (string index)} or null
+const GDB={
+  C:{
+    maj:[{frets:[-1,3,2,0,1,0],fingers:[0,3,2,0,1,0],barre:null,label:'C (open)'}],
+    min:[{frets:[-1,3,5,5,4,3],fingers:[0,1,3,4,2,1],barre:{fret:3,from:1,to:5},label:'Cm (barre 3)'}],
+    '7':[{frets:[-1,3,2,3,1,0],fingers:[0,3,2,4,1,0],barre:null,label:'C7 (open)'}],
+    maj7:[{frets:[-1,3,2,0,0,0],fingers:[0,3,2,0,0,0],barre:null,label:'Cmaj7 (open)'}],
+    min7:[{frets:[-1,3,5,3,4,3],fingers:[0,1,3,1,2,1],barre:{fret:3,from:1,to:5},label:'Cm7 (barre 3)'}],
+    sus2:[{frets:[-1,3,5,5,3,3],fingers:[0,1,3,4,1,1],barre:{fret:3,from:1,to:5},label:'Csus2'}],
+    sus4:[{frets:[-1,3,3,0,1,1],fingers:[0,3,4,0,1,2],barre:null,label:'Csus4 (open)'}],
+    dim:[{frets:[-1,-1,1,2,1,2],fingers:[0,0,1,3,2,4],barre:null,label:'Cdim'}],
+    dim7:[{frets:[-1,-1,1,2,4,2],fingers:[0,0,1,2,4,3],barre:null,label:'Cdim7'}],
+    aug:[{frets:[-1,-1,2,1,1,4],fingers:[0,0,3,1,2,4],barre:null,label:'Caug'}],
+    '6':[{frets:[-1,3,2,2,1,0],fingers:[0,4,2,3,1,0],barre:null,label:'C6 (open)'}],
+    m6:[{frets:[-1,3,5,5,4,5],fingers:[0,1,2,3,1,4],barre:{fret:3,from:1,to:5},label:'Cm6'}],
+    m7b5:[{frets:[-1,3,4,3,4,3],fingers:[0,1,2,1,3,1],barre:{fret:3,from:1,to:5},label:'Cm7b5'}]
+  },
+  D:{
+    maj:[{frets:[-1,-1,0,2,3,2],fingers:[0,0,0,1,3,2],barre:null,label:'D (open)'}],
+    min:[{frets:[-1,-1,0,2,3,1],fingers:[0,0,0,2,3,1],barre:null,label:'Dm (open)'}],
+    '7':[{frets:[-1,-1,0,2,1,2],fingers:[0,0,0,2,1,3],barre:null,label:'D7 (open)'}],
+    maj7:[{frets:[-1,-1,0,2,2,2],fingers:[0,0,0,1,2,3],barre:null,label:'Dmaj7 (open)'}],
+    min7:[{frets:[-1,-1,0,2,1,1],fingers:[0,0,0,2,1,1],barre:{fret:1,from:3,to:5},label:'Dm7 (open)'}],
+    sus2:[{frets:[-1,-1,0,2,3,0],fingers:[0,0,0,1,2,0],barre:null,label:'Dsus2 (open)'}],
+    sus4:[{frets:[-1,-1,0,2,3,3],fingers:[0,0,0,1,2,3],barre:null,label:'Dsus4 (open)'}],
+    dim:[{frets:[-1,-1,0,1,0,1],fingers:[0,0,0,2,0,3],barre:null,label:'Ddim'}],
+    dim7:[{frets:[-1,-1,0,1,3,1],fingers:[0,0,0,1,4,2],barre:null,label:'Ddim7'}],
+    aug:[{frets:[-1,-1,0,3,3,2],fingers:[0,0,0,3,4,2],barre:null,label:'Daug'}],
+    '6':[{frets:[-1,-1,0,2,0,2],fingers:[0,0,0,2,0,3],barre:null,label:'D6 (open)'}],
+    m6:[{frets:[-1,-1,0,2,0,1],fingers:[0,0,0,2,0,1],barre:null,label:'Dm6 (open)'}],
+    m7b5:[{frets:[-1,-1,0,1,0,0],fingers:[0,0,0,1,0,0],barre:null,label:'Dm7b5'}]
+  },
+  E:{
+    maj:[{frets:[0,2,2,1,0,0],fingers:[0,2,3,1,0,0],barre:null,label:'E (open)'}],
+    min:[{frets:[0,2,2,0,0,0],fingers:[0,2,3,0,0,0],barre:null,label:'Em (open)'}],
+    '7':[{frets:[0,2,0,1,0,0],fingers:[0,2,0,1,0,0],barre:null,label:'E7 (open)'}],
+    maj7:[{frets:[0,2,1,1,0,0],fingers:[0,2,1,1,0,0],barre:null,label:'Emaj7 (open)'}],
+    min7:[{frets:[0,2,0,0,0,0],fingers:[0,2,0,0,0,0],barre:null,label:'Em7 (open)'}],
+    sus2:[{frets:[0,2,2,4,0,0],fingers:[0,1,2,4,0,0],barre:null,label:'Esus2'}],
+    sus4:[{frets:[0,2,2,2,0,0],fingers:[0,2,3,4,0,0],barre:null,label:'Esus4'}],
+    dim:[{frets:[0,1,2,0,-1,-1],fingers:[0,1,2,0,0,0],barre:null,label:'Edim'}],
+    dim7:[{frets:[0,1,2,3,-1,-1],fingers:[0,1,2,3,0,0],barre:null,label:'Edim7'}],
+    aug:[{frets:[0,3,2,1,1,0],fingers:[0,4,3,1,2,0],barre:null,label:'Eaug'}],
+    '6':[{frets:[0,2,2,1,2,0],fingers:[0,2,3,1,4,0],barre:null,label:'E6 (open)'}],
+    m6:[{frets:[0,2,2,0,2,0],fingers:[0,2,3,0,4,0],barre:null,label:'Em6 (open)'}],
+    m7b5:[{frets:[0,1,0,0,3,-1],fingers:[0,1,0,0,4,0],barre:null,label:'Em7b5'}]
+  },
+  F:{
+    maj:[{frets:[1,3,3,2,1,1],fingers:[1,3,4,2,1,1],barre:{fret:1,from:0,to:5},label:'F (barre 1)'}],
+    min:[{frets:[1,3,3,1,1,1],fingers:[1,3,4,1,1,1],barre:{fret:1,from:0,to:5},label:'Fm (barre 1)'}],
+    '7':[{frets:[1,3,1,2,1,1],fingers:[1,3,1,2,1,1],barre:{fret:1,from:0,to:5},label:'F7 (barre 1)'}],
+    maj7:[{frets:[-1,-1,3,2,1,0],fingers:[0,0,3,2,1,0],barre:null,label:'Fmaj7 (open)'}],
+    min7:[{frets:[1,3,1,1,1,1],fingers:[1,3,1,1,1,1],barre:{fret:1,from:0,to:5},label:'Fm7 (barre 1)'}],
+    sus2:[{frets:[1,3,3,3,1,1],fingers:[1,2,3,4,1,1],barre:{fret:1,from:0,to:5},label:'Fsus2 (barre 1)'}],
+    sus4:[{frets:[1,3,3,3,1,1],fingers:[1,2,3,4,1,1],barre:{fret:1,from:0,to:5},label:'Fsus4 (barre 1)'}],
+    dim:[{frets:[-1,-1,0,1,0,1],fingers:[0,0,0,2,0,3],barre:null,label:'Fdim'}],
+    dim7:[{frets:[-1,0,1,2,1,2],fingers:[0,0,1,3,2,4],barre:null,label:'Fdim7'}],
+    aug:[{frets:[-1,0,3,2,2,1],fingers:[0,0,4,2,3,1],barre:null,label:'Faug'}],
+    '6':[{frets:[-1,-1,0,2,1,1],fingers:[0,0,0,3,1,2],barre:null,label:'F6'}],
+    m6:[{frets:[1,3,3,1,3,1],fingers:[1,2,3,1,4,1],barre:{fret:1,from:0,to:5},label:'Fm6 (barre 1)'}],
+    m7b5:[{frets:[1,2,3,1,4,1],fingers:[1,2,3,1,4,1],barre:{fret:1,from:0,to:5},label:'Fm7b5 (barre 1)'}]
+  },
+  G:{
+    maj:[{frets:[3,2,0,0,0,3],fingers:[2,1,0,0,0,3],barre:null,label:'G (open)'}],
+    min:[{frets:[3,5,5,3,3,3],fingers:[1,3,4,1,1,1],barre:{fret:3,from:0,to:5},label:'Gm (barre 3)'}],
+    '7':[{frets:[3,2,0,0,0,1],fingers:[3,2,0,0,0,1],barre:null,label:'G7 (open)'}],
+    maj7:[{frets:[3,2,0,0,0,2],fingers:[3,2,0,0,0,4],barre:null,label:'Gmaj7 (open)'}],
+    min7:[{frets:[3,5,3,3,3,3],fingers:[1,3,1,1,1,1],barre:{fret:3,from:0,to:5},label:'Gm7 (barre 3)'}],
+    sus2:[{frets:[3,0,0,0,3,3],fingers:[2,0,0,0,3,4],barre:null,label:'Gsus2 (open)'}],
+    sus4:[{frets:[3,3,0,0,1,3],fingers:[3,4,0,0,1,3],barre:null,label:'Gsus4 (open)'}],
+    dim:[{frets:[3,4,5,3,-1,-1],fingers:[1,2,3,1,0,0],barre:{fret:3,from:0,to:3},label:'Gdim'}],
+    dim7:[{frets:[3,4,2,3,-1,-1],fingers:[2,3,1,4,0,0],barre:null,label:'Gdim7'}],
+    aug:[{frets:[3,2,1,0,0,3],fingers:[4,3,2,0,0,4],barre:null,label:'Gaug (open)'}],
+    '6':[{frets:[3,2,0,0,0,0],fingers:[2,1,0,0,0,0],barre:null,label:'G6 (open)'}],
+    m6:[{frets:[3,5,5,3,5,3],fingers:[1,2,3,1,4,1],barre:{fret:3,from:0,to:5},label:'Gm6'}],
+    m7b5:[{frets:[3,4,5,3,5,3],fingers:[1,2,3,1,4,1],barre:{fret:3,from:0,to:5},label:'Gm7b5'}]
+  },
+  A:{
+    maj:[{frets:[-1,0,2,2,2,0],fingers:[0,0,1,2,3,0],barre:null,label:'A (open)'}],
+    min:[{frets:[-1,0,2,2,1,0],fingers:[0,0,2,3,1,0],barre:null,label:'Am (open)'}],
+    '7':[{frets:[-1,0,2,0,2,0],fingers:[0,0,2,0,3,0],barre:null,label:'A7 (open)'}],
+    maj7:[{frets:[-1,0,2,1,2,0],fingers:[0,0,2,1,3,0],barre:null,label:'Amaj7 (open)'}],
+    min7:[{frets:[-1,0,2,0,1,0],fingers:[0,0,2,0,1,0],barre:null,label:'Am7 (open)'}],
+    sus2:[{frets:[-1,0,2,2,0,0],fingers:[0,0,1,2,0,0],barre:null,label:'Asus2 (open)'}],
+    sus4:[{frets:[-1,0,2,2,3,0],fingers:[0,0,1,2,3,0],barre:null,label:'Asus4 (open)'}],
+    dim:[{frets:[-1,0,1,2,1,2],fingers:[0,0,1,3,2,4],barre:null,label:'Adim'}],
+    dim7:[{frets:[-1,0,1,2,1,2],fingers:[0,0,1,3,2,4],barre:null,label:'Adim7'}],
+    aug:[{frets:[-1,0,3,2,2,1],fingers:[0,0,4,2,3,1],barre:null,label:'Aaug'}],
+    '6':[{frets:[-1,0,2,2,2,2],fingers:[0,0,1,2,3,4],barre:null,label:'A6 (open)'}],
+    m6:[{frets:[-1,0,2,2,1,2],fingers:[0,0,2,3,1,4],barre:null,label:'Am6 (open)'}],
+    m7b5:[{frets:[-1,0,1,2,1,3],fingers:[0,0,1,3,2,4],barre:null,label:'Am7b5'}]
+  },
+  B:{
+    maj:[{frets:[-1,2,4,4,4,2],fingers:[1,1,2,3,4,1],barre:{fret:2,from:1,to:5},label:'B (barre 2)'}],
+    min:[{frets:[-1,2,4,4,3,2],fingers:[1,1,3,4,2,1],barre:{fret:2,from:1,to:5},label:'Bm (barre 2)'}],
+    '7':[{frets:[-1,2,1,2,0,2],fingers:[0,2,1,3,0,4],barre:null,label:'B7 (open)'}],
+    maj7:[{frets:[-1,2,4,3,4,2],fingers:[1,1,3,2,4,1],barre:{fret:2,from:1,to:5},label:'Bmaj7 (barre 2)'}],
+    min7:[{frets:[-1,2,0,2,0,2],fingers:[0,2,0,3,0,4],barre:null,label:'Bm7 (open)'}],
+    sus2:[{frets:[-1,2,4,4,2,2],fingers:[1,1,3,4,1,1],barre:{fret:2,from:1,to:5},label:'Bsus2'}],
+    sus4:[{frets:[-1,2,4,4,5,2],fingers:[1,1,2,3,4,1],barre:{fret:2,from:1,to:5},label:'Bsus4'}],
+    dim:[{frets:[-1,2,3,4,3,-1],fingers:[0,1,2,4,3,0],barre:null,label:'Bdim'}],
+    dim7:[{frets:[-1,2,0,1,0,1],fingers:[0,3,0,1,0,2],barre:null,label:'Bdim7 (open)'}],
+    aug:[{frets:[-1,2,1,0,0,-1],fingers:[0,3,2,0,0,0],barre:null,label:'Baug'}],
+    '6':[{frets:[-1,2,4,4,4,4],fingers:[1,1,2,3,4,4],barre:{fret:2,from:1,to:5},label:'B6'}],
+    m6:[{frets:[-1,2,4,4,3,4],fingers:[1,1,2,3,1,4],barre:{fret:2,from:1,to:5},label:'Bm6'}],
+    m7b5:[{frets:[-1,2,3,4,3,2],fingers:[1,1,2,4,3,1],barre:{fret:2,from:1,to:5},label:'Bm7b5'}]
+  }
+};
+// Enharmonic mappings for guitar lookup
+const GE_MAP={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#','C#':'Db','D#':'Eb','F#':'Gb','G#':'Ab','A#':'Bb'};
+// Extended chords for sharps/flats via barre offset
+function getGuitarVoicings(root,acc,type){
+  const full=root+acc;
+  // Direct lookup
+  if(GDB[root]&&GDB[root][type]) return GDB[root][type];
+  // For chromatic roots, build from the enharmonic equivalent
+  const enh=ENH[full];
+  if(enh){const er=enh[0];if(GDB[er]&&GDB[er][type]) return GDB[er][type];}
+  return null;
+}
 
-            const rootIndexSharp = NOTES.sharp.indexOf(fullRoot);
-            const rootIndexFlat = NOTES.flat.indexOf(fullRoot);
-            if (rootIndexSharp === -1 && rootIndexFlat === -1) throw new Error('תו בסיס לא תקין.');
+const PIANO_KEYS=[
+  {n:'C',t:'w'},{n:'C#',t:'b'},{n:'D',t:'w'},{n:'D#',t:'b'},{n:'E',t:'w'},
+  {n:'F',t:'w'},{n:'F#',t:'b'},{n:'G',t:'w'},{n:'G#',t:'b'},{n:'A',t:'w'},
+  {n:'A#',t:'b'},{n:'B',t:'w'}
+];
 
-            const useSharp = accidental === '#' || (accidental === '' && !['F', 'C'].includes(root));
-            const rootIndex = useSharp ? rootIndexSharp : rootIndexFlat;
-            const scale = useSharp ? NOTES.sharp : NOTES.flat;
+let chord={root:'C',acc:'',type:'maj'};
+let sol=false;
+let instTab='piano';
 
-            if (rootIndex === -1) throw new Error(`תו בסיס לא קיים. נסו ${ENHARMONICS[fullRoot]}.`);
+function noteName(n){
+  if(!sol) return n;
+  const r=n[0],ac=n.slice(1);
+  const s=SOL[r]||r;
+  if(ac==='#') return s+' ד\'';
+  if(ac==='b') return s+' ב\'';
+  return s;
+}
 
-            const notes = formula.intervals.map(interval => scale[(rootIndex + interval) % 12]);
-            
-            let primaryAlias = type === 'maj' ? '' : (type === 'min' ? 'm' : type);
-            const chordName = `${fullRoot}${primaryAlias}`;
+function calcChord({root,acc,type}){
+  const full=root+acc;
+  const f=FORMULAS[type];
+  if(!f) throw new Error('סוג אקורד לא ידוע.');
+  const ri_s=NS.indexOf(full), ri_f=NF.indexOf(full);
+  if(ri_s<0&&ri_f<0) throw new Error('תו בסיס לא תקין.');
+  const useSharp=acc==='#'||(acc===''&&!['F','C'].includes(root));
+  const ri=useSharp?ri_s:ri_f;
+  const scale=useSharp?NS:NF;
+  if(ri<0) throw new Error(`תו לא קיים. נסו: ${ENH[full]||''}`);
+  const notes=f.intervals.map(i=>scale[(ri+i)%12]);
+  const pa=type==='maj'?'':type==='min'?'m':type;
+  const cn=`${full}${pa}`;
+  const aliases=new Set();
+  const enh=ENH[full];
+  f.aliases.forEach(a=>{
+    aliases.add(`${full}${a}`);
+    if(enh) aliases.add(`${enh}${a}`);
+  });
+  aliases.delete(cn);
+  return{name:cn,typeName:f.name,notes,aliases:Array.from(aliases),explain:f.explain};
+}
 
-            const allAliases = new Set();
-            const enharmonicRoot = ENHARMONICS[fullRoot];
-            formula.aliases.forEach(alias => {
-                allAliases.add(`${fullRoot}${alias}`);
-                if (enharmonicRoot) allAliases.add(`${enharmonicRoot}${alias}`);
-            });
-            allAliases.delete(chordName);
+function parseChord(s){
+  if(!s) return null;
+  const t=s.trim().replace('Δ','maj7').replace('°','dim').replace('ø','m7b5').replace(/^-/,'m');
+  const m=t.match(/^([A-G])([#b]?)(.*)$/i);
+  if(!m) return null;
+  let[,r,a,tp]=m;
+  r=r.toUpperCase(); tp=tp.toLowerCase();
+  if(tp===''||tp==='maj') tp='maj';
+  else if(tp==='m'||tp==='min'||tp==='-') tp='min';
+  else if(tp==='sus') tp='sus4';
+  else if(tp==='+') tp='aug';
+  if(!FORMULAS[tp]) return null;
+  return{root:r,acc:a,type:tp};
+}
 
-            return { name: chordName, notes, aliases: Array.from(allAliases), explanation: formula.explanation };
-        }
+function buildPiano(notes){
+  const hl=new Set(notes.flatMap(n=>ENH[n]?[n,ENH[n]]:[n]));
+  let w=0;
+  const keys=PIANO_KEYS.map(k=>{
+    const on=hl.has(k.n);
+    const lbl=sol?noteName(k.n):k.n;
+    if(k.t==='w'){
+      const h=`<div class="pk w${on?' hl':''}" style="left:${(w/7)*100}%;width:${100/7}%;height:100%"><span class="pk-lbl">${lbl}</span></div>`;
+      w++;return h;
+    }else{
+      return `<div class="pk b${on?' hl':''}" style="left:${(w/7)*100}%;width:${100/14}%;height:62%;transform:translateX(-50%)"><span class="pk-lbl">${lbl}</span></div>`;
+    }
+  }).join('');
+  return `<div class="piano-wrap" dir="ltr">${keys}</div>`;
+}
 
-        function parseChordName(input) {
-            if (!input) return null;
-            const sanitized = input.trim().replace('Δ','maj7').replace('°','dim').replace('ø','m7b5').replace('-','m');
-            const match = sanitized.match(/^([A-G])([#b]?)(.*)$/i);
-            if (!match) return null;
+function buildGuitarSVG(v){
+  const{frets,fingers,barre,label}=v;
+  const played=frets.filter(f=>f>0);
+  const W=148,H=128,pL=22,pR=10,pT=28,pB=18;
+  const gw=W-pL-pR,gh=H-pT-pB;
+  const ROWS=4;
+  const sx=gw/5, sy=gh/ROWS;
+  const minF=played.length?Math.min(...played):0;
+  const maxF=played.length?Math.max(...played):0;
+  const sf=barre?barre.fret:Math.max(1,minF);
+  let svg=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
+  // fret position label
+  if(sf>1) svg+=`<text x="${pL-4}" y="${pT+sy*0.65}" text-anchor="end" font-size="8" fill="#c9a84c" font-family="JetBrains Mono,monospace">${sf}fr</text>`;
+  // nut or top bar
+  const nutW=sf===1?3.5:1.5;
+  svg+=`<rect x="${pL}" y="${pT-nutW/2}" width="${gw}" height="${nutW}" rx="1" fill="${sf===1?'#d0cab5':'#555'}"/>`;
+  // fret lines
+  for(let i=1;i<=ROWS;i++) svg+=`<line x1="${pL}" y1="${pT+i*sy}" x2="${pL+gw}" y2="${pT+i*sy}" stroke="#2a2d3a" stroke-width="1"/>`;
+  // string lines
+  for(let s=0;s<6;s++) svg+=`<line x1="${pL+s*sx}" y1="${pT}" x2="${pL+s*sx}" y2="${pT+ROWS*sy}" stroke="#3a3d50" stroke-width="1.2"/>`;
+  // barre bar
+  if(barre){
+    const by=pT+(barre.fret-sf+0.5)*sy;
+    const bx1=pL+barre.from*sx, bx2=pL+barre.to*sx;
+    svg+=`<rect x="${bx1}" y="${by-6}" width="${bx2-bx1}" height="12" rx="6" fill="#c9a84c" opacity="0.88"/>`;
+    svg+=`<text x="${(bx1+bx2)/2}" y="${by+4}" text-anchor="middle" font-size="7" fill="#140e00" font-weight="bold" font-family="Nunito,sans-serif">B</text>`;
+  }
+  // dots
+  for(let s=0;s<6;s++){
+    const f=frets[s];
+    const cx=pL+s*sx;
+    if(f<0){
+      svg+=`<line x1="${cx-4}" y1="${pT-15}" x2="${cx+4}" y2="${pT-7}" stroke="#444" stroke-width="1.5"/>`;
+      svg+=`<line x1="${cx+4}" y1="${pT-15}" x2="${cx-4}" y2="${pT-7}" stroke="#444" stroke-width="1.5"/>`;
+    }else if(f===0){
+      svg+=`<circle cx="${cx}" cy="${pT-11}" r="4.5" fill="none" stroke="#666" stroke-width="1.3"/>`;
+    }else{
+      const isBarre=barre&&f===barre.fret&&s>=barre.from&&s<=barre.to;
+      if(!isBarre){
+        const fy=pT+(f-sf+0.5)*sy;
+        svg+=`<circle cx="${cx}" cy="${fy}" r="6.5" fill="#c9a84c"/>`;
+        if(fingers[s]>0) svg+=`<text x="${cx}" y="${fy+3}" text-anchor="middle" font-size="7.5" fill="#140e00" font-weight="bold" font-family="Nunito,sans-serif">${fingers[s]}</text>`;
+      }
+    }
+  }
+  svg+='</svg>';
+  return `<div class="gdiag">${svg}<div class="gdiag-lbl">${label}</div></div>`;
+}
 
-            let [, root, accidental, type] = match;
-            root = root.toUpperCase();
-            type = type.toLowerCase();
-            if (type === '' || type === 'maj') type = 'maj';
-            if (type === 'm') type = 'min';
-            if (type === 'sus') type = 'sus4';
-            if (type === '+') type = 'aug';
+function buildGuitar(root,acc,type){
+  const vs=getGuitarVoicings(root,acc,type);
+  if(!vs||!vs.length) return `<div class="guitar-none">אין תרשים זמין לאקורד זה.</div>`;
+  return `<div class="guitar-grid">${vs.map(v=>buildGuitarSVG(v)).join('')}</div>`;
+}
 
-            if (!CHORD_FORMULAS[type]) return null;
-            return { root, accidental, type };
-        }
+function render(){
+  const oc=document.getElementById('out-card');
+  let info;
+  try{ info=calcChord(chord); }
+  catch(e){
+    oc.innerHTML=`<div style="padding:1.375rem"><div class="err-state"><div class="err-icon">☹️</div><p class="err-title">שגיאה</p><p class="err-msg">${e.message}</p></div></div>`;
+    updateBtns();return;
+  }
+  const notesHtml=info.notes.map(n=>`<span class="note-chip">${noteName(n)}</span>`).join('<span class="note-sep">·</span>');
+  const pianoHtml=buildPiano(info.notes);
+  const guitarHtml=buildGuitar(chord.root,chord.acc,chord.type);
 
-        function getNoteName(note) {
-            if (noteNaming === 'letters') return note;
-            
-            const root = note.charAt(0);
-            const solfegeRoot = SOLFEGE_MAP[root] || root;
-            
-            if (note.includes('#')) {
-                return `${solfegeRoot} דיאז`;
-            } else if (note.includes('b')) {
-                return `${solfegeRoot} במול`;
-            }
-            
-            return solfegeRoot;
-        }
+  oc.innerHTML=`
+<div class="card-hdr"><span class="dot"></span><h2>תוצאה</h2></div>
+<div class="chord-hero">
+  <div class="chord-name pop">${info.name}</div>
+  <div class="chord-type-lbl">${info.typeName}</div>
+</div>
+<div style="height:.875rem"></div>
+<div class="notes-row">${notesHtml}</div>
+<div class="info-sections">
+  <div class="info-block">
+    <div class="info-lbl">שמות וסימונים נוספים</div>
+    <div class="info-val">${info.aliases.length?info.aliases.join(' · '):'—'}</div>
+  </div>
+  <div class="info-block">
+    <div class="info-lbl">מבנה ואופי האקורד</div>
+    <div class="info-explain">${info.explain}</div>
+  </div>
+  <div>
+    <div class="inst-tabs">
+      <button class="tab-btn${instTab==='piano'?' on':''}" data-tab="piano">🎹 פסנתר</button>
+      <button class="tab-btn${instTab==='guitar'?' on':''}" data-tab="guitar">🎸 גיטרה</button>
+    </div>
+    <div class="tab-pane" data-pane="piano" style="display:${instTab==='piano'?'block':'none'}">${pianoHtml}</div>
+    <div class="tab-pane" data-pane="guitar" style="display:${instTab==='guitar'?'block':'none'}">${guitarHtml}</div>
+  </div>
+</div>`;
 
-        // --- UI UPDATE ---
-        function updateDisplay() {
-            try {
-                const info = calculateChordInfo(currentChord);
-                renderSuccess(info);
-            } catch (e) {
-                renderError(e.message);
-            }
-            updateActiveButtons();
-        }
-
-        function renderSuccess(info) {
-            const notesToHighlight = [...info.notes]; // Create a mutable copy
-
-            let whiteKeyIndex = 0;
-            const pianoKeysHTML = PIANO_KEYS.map(key => {
-                const noteIndex = notesToHighlight.findIndex(note => {
-                    const enharmonic = ENHARMONICS[note] || null;
-                    return key.name === note || key.name === enharmonic;
-                });
-
-                let highlightClass = '';
-                if (noteIndex > -1) {
-                    highlightClass = 'highlight';
-                    notesToHighlight.splice(noteIndex, 1); // Consume the note
-                }
-
-                const keyTypeClass = `${key.type}-key`;
-                let style = '';
-                if (key.type === 'white') {
-                    style = `left: ${whiteKeyIndex * (100 / 7)}%;`;
-                    whiteKeyIndex++;
-                } else { // black key
-                    style = `left: ${whiteKeyIndex * (100 / 7)}%;`;
-                }
-
-                return `<div class="key ${keyTypeClass} ${highlightClass}" style="${style}">
-                            ${getNoteName(key.name)}
-                        </div>`;
-            }).join('');
-
-            const pianoHTML = `<div id="piano-visualization" dir="ltr" class="${noteNaming === 'solfege' ? 'solfege-mode' : ''}">${pianoKeysHTML}</div>`;
-            
-            outputArea.innerHTML = `
-                <h2>תוצאה</h2>
-                <div id="chord-display-wrapper">
-                    <span id="chord-display" dir="ltr">${info.name}</span>
-                </div>
-                <div>
-                    <h3 class="output-box-title"><span>🎵</span> מרכיבי האקורד</h3>
-                    <div id="chord-notes" class="output-box-content" dir="ltr">${info.notes.map(getNoteName).join(' - ')}</div>
-                </div>
-                <div>
-                    <h3 class="output-box-title"><span>🔄</span> שמות וסימונים נוספים</h3>
-                    <div id="chord-aliases" class="output-box-content" dir="ltr">${info.aliases.length > 0 ? info.aliases.join(' , ') : 'אין'}</div>
-                </div>
-                <div>
-                    <h3 class="output-box-title"><span>📖</span> הסבר על מבנה האקורד</h3>
-                    <div id="chord-explanation" class="output-box-content">${info.explanation}</div>
-                </div>
-                <div>
-                    <h3 class="output-box-title"><span>🎹</span> הצגה חזותית על פסנתר</h3>
-                    ${pianoHTML}
-                </div>
-            `;
-        }
-
-        function renderError(message) {
-             outputArea.innerHTML = `
-                <h2>תוצאה</h2>
-                <div class="error-display">
-                    <div class="emoji">☹️</div>
-                    <p class="title">שגיאה</p>
-                    <p class="message">${message}</p>
-                </div>
-            `;
-        }
-
-        function updateActiveButtons() {
-            document.querySelectorAll('.btn-group button').forEach(btn => {
-                btn.classList.remove('btn-active');
-                if ((btn.dataset.note && btn.dataset.note === currentChord.root) ||
-                    (btn.dataset.accidental === currentChord.accidental) ||
-                    (btn.dataset.type && btn.dataset.type === currentChord.type)) {
-                    btn.classList.add('btn-active');
-                }
-            });
-        }
-        
-        // --- EVENT LISTENERS ---
-        rootSelector.addEventListener('click', (e) => {
-            if (e.target.dataset.note) {
-                currentChord.root = e.target.dataset.note;
-                updateDisplay();
-            }
-        });
-        accidentalSelector.addEventListener('click', (e) => {
-            if (e.target.dataset.accidental !== undefined) {
-                currentChord.accidental = e.target.dataset.accidental;
-                updateDisplay();
-            }
-        });
-        typeSelector.addEventListener('click', (e) => {
-            if (e.target.dataset.type) {
-                currentChord.type = e.target.dataset.type;
-                updateDisplay();
-            }
-        });
-
-        const handleManualSubmit = () => {
-            const parsed = parseChordName(manualInput.value);
-            if (parsed) {
-                currentChord = parsed;
-                updateDisplay();
-            } else {
-                renderError(`לא זוהה האקורד "${manualInput.value}"`);
-            }
-        };
-        manualSubmit.addEventListener('click', handleManualSubmit);
-        manualInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleManualSubmit(); });
-
-        noteNamingToggle.addEventListener('click', () => {
-            noteNaming = noteNaming === 'letters' ? 'solfege' : 'letters';
-            noteNamingToggle.textContent = noteNaming === 'letters' ? 'דו רה מי' : 'A B C';
-            updateDisplay();
-        });
-
-        helpBtn.addEventListener('click', () => modalBackdrop.classList.add('visible'));
-        closeModalBtn.addEventListener('click', () => modalBackdrop.classList.remove('visible'));
-        modalBackdrop.addEventListener('click', (e) => {
-            if (e.target === modalBackdrop) modalBackdrop.classList.remove('visible');
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') modalBackdrop.classList.remove('visible');
-        });
-
-        // --- INITIALIZATION ---
-        updateDisplay();
+  document.querySelectorAll('.tab-btn').forEach(b=>{
+    b.addEventListener('click',()=>{
+      instTab=b.dataset.tab;
+      document.querySelectorAll('.tab-btn').forEach(x=>x.classList.toggle('on',x===b));
+      document.querySelectorAll('.tab-pane').forEach(p=>p.style.display=p.dataset.pane===instTab?'block':'none');
     });
-    </script>
+  });
+  updateBtns();
+}
+
+function updateBtns(){
+  document.querySelectorAll('[data-root]').forEach(b=>b.classList.toggle('on',b.dataset.root===chord.root));
+  document.querySelectorAll('[data-acc]').forEach(b=>b.classList.toggle('on',b.dataset.acc===chord.acc));
+  document.querySelectorAll('[data-type]').forEach(b=>b.classList.toggle('on',b.dataset.type===chord.type));
+}
+
+document.getElementById('root-sel').addEventListener('click',e=>{
+  if(e.target.dataset.root){chord.root=e.target.dataset.root;render();}
+});
+document.getElementById('acc-sel').addEventListener('click',e=>{
+  if(e.target.dataset.acc!==undefined){chord.acc=e.target.dataset.acc;render();}
+});
+document.getElementById('type-sel').addEventListener('click',e=>{
+  if(e.target.dataset.type){chord.type=e.target.dataset.type;render();}
+});
+function doManual(){
+  const v=document.getElementById('manual').value;
+  const p=parseChord(v);
+  if(p){chord=p;render();}
+  else document.getElementById('out-card').innerHTML=`<div style="padding:1.375rem"><div class="err-state"><div class="err-icon">🎸</div><p class="err-title">לא זוהה</p><p class="err-msg">נסה: C#m7, Bbmaj7, Gsus4</p></div></div>`;
+}
+document.getElementById('go-btn').addEventListener('click',doManual);
+document.getElementById('manual').addEventListener('keydown',e=>{if(e.key==='Enter')doManual();});
+document.getElementById('sol-toggle').addEventListener('click',function(){
+  sol=!sol;this.textContent=sol?'A B C':'דו רה מי';render();
+});
+const modal=document.getElementById('modal');
+document.getElementById('help-btn').addEventListener('click',()=>modal.classList.add('show'));
+document.getElementById('close-modal').addEventListener('click',()=>modal.classList.remove('show'));
+modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('show');});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.classList.remove('show');});
+
+render();
+</script>
 </body>
 </html>
-```
